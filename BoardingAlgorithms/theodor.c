@@ -45,11 +45,18 @@ typedef int (*compfn)(const void*, const void*);
 // Dummy
 void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
+void steffen_Que(passenger *pPassenger, passenger *pPassenger1, int passengers);
 
 // Good
 char GetSeatName(seatLetter letter);
 void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure);
 int passengerCompare(passenger* a, passenger* b);
+void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers);
+
+
+int getSpot(int *takenSpots, int numPassengers);
+
+void CopyArray(passenger *to, passenger *from, int num);
 
 int main()
 {
@@ -59,6 +66,7 @@ int main()
 
     QueuePassengers(passengers, 3, Random);
 
+    printf("\n");
     printPassenger(passengers);
 
     return 0;
@@ -68,9 +76,50 @@ int main()
 void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedure procedure)
 {
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
-    int* takeSpots = calloc(numPassengers, sizeof(int));
+    CopyArray(passengersCopy, passengers, numPassengers);
     qsort(passengersCopy, numPassengers, sizeof(passengers[0]), (compfn)passengerCompare);
 
+    switch (procedure)
+    {
+        case Random:
+            random_Que(passengers, passengersCopy, numPassengers);
+            break;
+        case SteffenModified:
+            steffen_Que(passengers, passengersCopy, numPassengers);
+            break;
+    }
+}
+
+void CopyArray(passenger *to, passenger *from, int num)
+{
+    for (int i = 0; i < num; ++i)
+    {
+        to[i] = from[i];
+    }
+}
+
+void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers)
+{
+    int* takeSpots = calloc(numPassengers, sizeof(int));
+
+    for (int i = 0; i < numPassengers; ++i)
+    {
+        int spot = getSpot(takeSpots, numPassengers);
+        passengers[spot] = sortedPassengers[i];
+        takeSpots[i] = 1;
+    }
+}
+
+int getSpot(int *takenSpots, int numPassengers)
+{
+    int index = rand() % numPassengers;
+    while (takenSpots[index])
+    {
+        index++;
+        index %= numPassengers;
+    }
+
+    return index;
 }
 
 int passengerCompare(passenger* a, passenger* b)
@@ -88,6 +137,12 @@ int passengerCompare(passenger* a, passenger* b)
 /*
  * Dummy stuff :D
  */
+
+void steffen_Que(passenger *pPassenger, passenger *pPassenger1, int passengers)
+{
+
+}
+
 
 void printPassenger(passenger passengers[3])
 {
