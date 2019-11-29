@@ -14,6 +14,19 @@ enum state {
 } state;
 
 typedef
+enum seatLetter{
+    Aisle = 0,
+    C, B, A,
+    D, E, F
+} seatLetter;
+
+typedef
+enum boardingProcedure{
+    Random,
+    SteffenModified
+};
+
+typedef
 struct point {
     float x, y;
 } point;
@@ -37,7 +50,9 @@ int main (void) {
 
     if (testFile != NULL) {
         while ((ch = fgetc(testFile)) != EOF) {
-            /* code */
+            while ((ch = fgetc(testFile)) != '\n') {
+
+            }
         }
     }
 
