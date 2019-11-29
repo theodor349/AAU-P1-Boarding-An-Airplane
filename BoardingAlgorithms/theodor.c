@@ -14,7 +14,7 @@ typedef
 enum boardingProcedure{
     Random,
     SteffenModified
-};
+}boardingProcedure;
 
 typedef
 enum state {
@@ -40,13 +40,16 @@ struct passenger {
     int hasLuggage;
 } passenger;
 
-void generatePassengers(passenger passengers[3]);
+typedef int (*compfn)(const void*, const void*);
 
+// Dummy
+void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
 
+// Good
 char GetSeatName(seatLetter letter);
-
 void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure);
+int passengerCompare(passenger* a, passenger* b);
 
 int main()
 {
@@ -56,13 +59,30 @@ int main()
 
     QueuePassengers(passengers, 3, Random);
 
+    printPassenger(passengers);
+
     return 0;
 }
 
-void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure)
+// CALLED FROM MAIN FUNCTION
+void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedure procedure)
 {
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
+    int* takeSpots = calloc(numPassengers, sizeof(int));
+    qsort(passengersCopy, numPassengers, sizeof(passengers[0]), (compfn)passengerCompare);
 
+}
+
+int passengerCompare(passenger* a, passenger* b)
+{
+    int r = a->seatPos.x - b->seatPos.y;
+    if(r != 0)
+        return r;
+
+    int ay = a->seatPos.y < 4 ? a->seatPos.y + 6 : a->seatPos.y;
+    int by = b->seatPos.y < 4 ? b->seatPos.y + 6 : b->seatPos.y;
+
+    return  ay -by;
 }
 
 /*
