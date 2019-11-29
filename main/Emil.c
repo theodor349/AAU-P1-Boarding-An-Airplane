@@ -24,7 +24,7 @@ typedef
 enum boardingProcedure{
     Random,
     SteffenModified
-};
+} procedure;
 
 typedef
 struct point {
@@ -50,8 +50,8 @@ int main (void) {
 
     if (testFile != NULL) {
         while ((ch = fgetc(testFile)) != EOF) {
-            while ((ch = fgetc(testFile)) != '\n') {
-
+            while ((ch = fgetc(testFile)) != ' ') {
+                
             }
         }
     }
