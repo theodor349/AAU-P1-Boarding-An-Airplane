@@ -3,4 +3,4 @@ project(BoardingAlgorithms C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(BoardingAlgorithms main.c)
+add_executable(BoardingAlgorithms main.c theodor.c)
