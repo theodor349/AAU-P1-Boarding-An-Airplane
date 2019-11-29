@@ -47,6 +47,7 @@ float getTimestep(void);
 double gcd(double a, double b);
 
 // This is here temporarily so we can compile the file and see if there are any errors
+// compile with:     -std=c99 -pedantic -Wall
 int main(void) {
     return 0;
 }
