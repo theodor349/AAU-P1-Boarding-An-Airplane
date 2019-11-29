@@ -1,3 +1,4 @@
+
 //    steffen benjamin
 //    binary search benjamin
 
@@ -8,5 +9,3 @@
 
 int main (void){
 
-    return 0;
-}
