@@ -17,7 +17,7 @@ typedef
 enum boardingProcedure{
     Random,
     SteffenModified
-};
+}boardingProcedure;
 
 typedef
 enum state {
@@ -28,11 +28,11 @@ enum state {
 } state;
 
 typedef
-enum rowLetter{
+enum seatletter{
     Aisle = 0,
     C, B, A,
     D, E, F
-} rowLetter;
+} seatletter;
 
 typedef
 struct passenger {
@@ -43,35 +43,84 @@ struct passenger {
     int hasLuggage;
 } passenger;
 
-void generatePassengers(passenger passengers[3]);
+typedef int (*compfn)(const void*, const void*);
 
+// Dummy
+void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
 
-char GetSeatName(rowLetter letter);
+// Good
+char GetSeatName(seatletter letter);
+void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure);
+int passengerCompare(passenger* a, passenger* b);
 
-void steffen_que(passenger passengers[3], int numPassengers, enum boardingProcedure procedure);
+void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
+int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers);
 
-void binary_search();
-
-int main()
-{
+int main(){
     passenger passengers[3];
     generatePassengers(passengers);
     printPassenger(passengers);
 
     QueuePassengers(passengers, 3, Random);
 
+    printPassenger(passengers);
+
     return 0;
 }
-
-void steffen_que(passenger passengers[3], int numPassengers, enum boardingProcedure procedure)
+void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedure procedure)
 {
+    passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
+    int* takeSpots = calloc(numPassengers, sizeof(int));
+    qsort(passengersCopy, numPassengers, sizeof(passengers[0]), (compfn)passengerCompare);
+
+}
+
+int passengerCompare(passenger* a, passenger* b)
+{
+    int r = a->seatPos.x - b->seatPos.y;
+    if(r != 0)
+        return r;
+
+    int ay = a->seatPos.y < 4 ? a->seatPos.y + 6 : a->seatPos.y;
+    int by = b->seatPos.y < 4 ? b->seatPos.y + 6 : b->seatPos.y;
+
+    return  ay -by;
+}
+
+
+void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers){
+    passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
+    int group = 0, row  = 0, seat = 0, check, place_in_que = 0, ps_nr = 0;
+
+    for ( group = 0; group < 4; group++){
+        for (row = (33 - (group/2)); row > 0 ; row-2){
+            check = 0;
+            for (seat = A ; seat > check; seat--){
+                if (group % 2 != 0){
+                    seat += 3;
+                    check += 3;
+                }
+                ps_nr = binary_search(sorted_passengers, seat, row ,numPassengers);
+                passengers[0] = sorted_passengers[ps_nr];
+            }
+            
+        }
+        
+    }
     
 }
 
-void binary_search(){
+int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers){
+    int result = 0, i;
+    sorted_passengers[i].seatPos.y;
 
+    result = sorted_passengers;
+
+    return result;
 }
+
+
 
 /*
  * Dummy stuff :D
@@ -81,11 +130,11 @@ void printPassenger(passenger passengers[3])
 {
     for (int i = 0; i < 3; ++i)
     {
-        printf("%d row: %d, seat %c\n", i, (int) passengers[i].seatPos.x, GetSeatName((rowLetter) passengers[i].seatPos.y));
+        printf("%d row: %d, seat %c\n", i, (int) passengers[i].seatPos.x, GetSeatName((seatletter) passengers[i].seatPos.y));
     }
 }
 
-char GetSeatName(rowLetter letter)
+char GetSeatName(seatletter letter)
 {
     switch (letter)
     {
