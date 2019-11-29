@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef
 struct point {
@@ -24,11 +25,11 @@ enum state {
 } state;
 
 typedef
-enum rowLetter{
+enum seatLetter{
     Aisle = 0,
     C, B, A,
     D, E, F
-} rowLetter;
+} seatLetter;
 
 typedef
 struct passenger {
@@ -43,7 +44,7 @@ void generatePassengers(passenger passengers[3]);
 
 void printPassenger(passenger passengers[3]);
 
-char GetSeatName(rowLetter letter);
+char GetSeatName(seatLetter letter);
 
 void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure);
 
@@ -60,9 +61,9 @@ int main()
 
 void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure)
 {
-    
-}
+    passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
 
+}
 
 /*
  * Dummy stuff :D
@@ -72,11 +73,11 @@ void printPassenger(passenger passengers[3])
 {
     for (int i = 0; i < 3; ++i)
     {
-        printf("%d row: %d, seat %c\n", i, (int) passengers[i].seatPos.x, GetSeatName((rowLetter) passengers[i].seatPos.y));
+        printf("%d row: %d, seat %c\n", i, (int) passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
     }
 }
 
-char GetSeatName(rowLetter letter)
+char GetSeatName(seatLetter letter)
 {
     switch (letter)
     {
