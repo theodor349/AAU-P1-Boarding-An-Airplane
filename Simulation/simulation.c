@@ -38,10 +38,10 @@ struct passenger {
 } passenger;
 
 float runSimulation(passenger *pArr, int n);
-passenger updatePassenger(passenger p);
-passenger stateLookingForRow(passenger p);
-passenger stateLuggage(passenger p);
-passenger stateSeating(passenger p);
+void updatePassenger(passenger *pArr, int i);
+void stateLookingForRow(passenger *pArr, int i);
+void stateLuggage(passenger *pArr, int i);
+void stateSeating(passenger *pArr, int i);
 int getPassengerAhead(passenger *pArr, int pIndex);
 float getTimestep(void);
 double gcd(double a, double b);
@@ -54,7 +54,6 @@ int main(void) {
 
 float runSimulation(passenger *pArr, int n) {
     int tick = 0, seatedPassengers = 0;
-    float timestep = getTimestep();
 
     //Keep ticking until all passengers are seated
     while(seatedPassengers < n) {
@@ -64,49 +63,63 @@ float runSimulation(passenger *pArr, int n) {
             if(pArr[i].currState == Idle) 
                 continue;
 
-            pArr[i] = updatePassenger(pArr[i]);
+            if(pArr[i].ticksToWait > 0) 
+                pArr[i].ticksToWait--;
+            else 
+                updatePassenger(pArr, i);
         }
 
         tick++;
     }
 
-    return tick * timestep;
+    return tick * getTimestep();
 }
 
-passenger updatePassenger(passenger p) {
-    switch(p.currState) {
+void updatePassenger(passenger *pArr, int i) {
+    switch(pArr[i].currState) {
         case LookingForRow:
-            stateLookingForRow(p);  break;
+            stateLookingForRow(pArr, i);  break;
         case Luggage:
-            stateLuggage(p);        break;
+            stateLuggage(pArr, i);        break;
         case Seating:
-            stateSeating(p);        break;
+            stateSeating(pArr, i);        break;
         default:
             printf("Something weird happened\n");
             break;
     }
-    return p;
 }
 
-passenger stateLookingForRow(passenger p) {
+void stateLookingForRow(passenger *pArr, int i) {
+    float newX = pArr[i].currPos.x + tickrate;
+    if(newX > pArr[i].seatPos.x) {
+        newX = pArr[i].seatPos.x;
+    }
 
-    //DO SOMETHING WITH THE PASSENGER "P"
+    if(pArr[i].currPos.x == pArr[i].seatPos.x) {
+        pArr[i].currState = pArr[i].hasLuggage ? Luggage : Seating;
+        return;
+    }
 
-    return p;
+    int infront = getPassengerAhead(pArr, i);
+    if(infront == -1) {
+        pArr[i].currPos.x = newX;
+    } else {
+        if(pArr[infront].currPos.x - newX >= PERSONAL_SPACE) {
+            pArr[i].position.x = newX;
+        }
+    }
 }
 
-passenger stateLuggage(passenger p) {
-
-    //DO SOMETHING WITH THE PASSENGER "P"
-
-    return p;
+void stateLuggage(passenger *pArr, int i) {
+    pArr[i].hasLuggage = false;
+    pArr[i].ticksToWait = LUGGAGE_STORE_TIME / getTimestep();
+    pArr[i].currState = Seating;
 }
 
-passenger stateSeating(passenger p) {
+void stateSeating(passenger *pArr, int i) {
 
-    //DO SOMETHING WITH THE PASSENGER "P"
+    //DO SOMETHING WITH THE PASSENGER "pArr[i]"
 
-    return p;
 }
 
 //Returns the index of the passenger ahead of the passenger with index pIndex.
