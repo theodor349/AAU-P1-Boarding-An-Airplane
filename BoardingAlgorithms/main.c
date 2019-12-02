@@ -53,10 +53,7 @@ int passengerCompare(passenger* a, passenger* b);
 void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers);
 int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers);
 void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
-
-
 int getRandomSpot(int *takenSpots, int numPassengers);
-
 void CopyArray(passenger *to, passenger *from, int num);
 
 int main()
@@ -65,9 +62,12 @@ int main()
     generatePassengers(passengers);
     printPassenger(passengers);
 
-    QueuePassengers(passengers, 3, SteffenModified);
+    printf("\n Random\n");
+    QueuePassengers(passengers, 3, Random);
+    printPassenger(passengers);
 
-    printf("\n");
+    printf("\n Steffen\n");
+    QueuePassengers(passengers, 3, SteffenModified);
     printPassenger(passengers);
 
     return 0;
