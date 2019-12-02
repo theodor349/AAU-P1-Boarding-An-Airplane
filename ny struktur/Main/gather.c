@@ -1,12 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
 
 #define MAX_SEATS 189
 #define LENGTH 10
-
-readinput();
 
 typedef
 enum state {
@@ -43,31 +42,37 @@ struct passenger {
     bool hasLuggage;
 } passenger;
 
+void readinput(passenger* passengers);
+int gather();
+
 int main (void) {
     gather();
-
-    return EXIT_SUCCES;
-}
-
-int gather(void){
-    readinput();
 
     return 0;
 }
 
-readinput(){
+int gather(void){
+    passenger* passengers;
+    readinput(passengers);
+
+    free(passengers);
+    return 0;
+}
+
+void readinput(passenger* passengers){
     FILE *testFile;
     char line[LENGTH];
     int i = 0, p = 0;
-    passenger passengers[p];
 
     testFile = fopen("passengertest.txt", "r");
 
     if (fgets(line, LENGTH, testFile) != NULL) {
-
+            sscanf(line, " %d", &p);
     }
 
-    if (testFile != NULL) {
+    passengers = calloc(p, sizeof(passenger));
+
+    /*if (testFile != NULL) {
         while ((ch = fgetc(testFile)) != EOF && (ch = fgetc(testFile)) != 'A') {
                 passengers[i].seatPos.x = ch;
                 i++;
@@ -75,6 +80,6 @@ readinput(){
     }
 // for testing purposes
     printf("%lf\n%lf\n%lf\n%lf\n%lf\n", passengers[0].seatPos.x, passengers[1].seatPos.x, passengers[2].seatPos.x, passengers[3].seatPos.x, passengers[4].seatPos.x);
-
+    */
     return 0;
 }
