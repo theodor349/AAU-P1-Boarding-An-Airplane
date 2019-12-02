@@ -5,6 +5,8 @@
 
 #define MAX_SEATS 189
 
+readinput();
+
 typedef
 enum state {
     LookingForRow = 0,
@@ -12,6 +14,19 @@ enum state {
     Seating,
     Idle
 } state;
+
+typedef
+enum seatLetter{
+    Aisle = 0,
+    C, B, A,
+    D, E, F
+} seatLetter;
+
+typedef
+enum boardingProcedure{
+    Random,
+    SteffenModified
+} procedure;
 
 typedef
 struct point {
@@ -28,18 +43,27 @@ struct passenger {
 } passenger;
 
 int main (void) {
+    readinput();
+}
+
+readinput(){
     FILE *testFile;
     int ch;
-    passenger passengers[MAX_SEATS];
+    int i = 0, p = 0;
+    passenger passengers[p];
 
-    testFile = fopen("passengertest", "r");
+    testFile = fopen("passengertest.txt", "r");
+
 
 
     if (testFile != NULL) {
-        while ((ch = fgetc(testFile)) != EOF) {
-            /* code */
+        while ((ch = fgetc(testFile)) != EOF && (ch = fgetc(testFile)) != 'A') {
+                passengers[i].seatPos.x = ch;
+                i++;
         }
     }
+// for testing purposes
+    printf("%lf\n%lf\n%lf\n%lf\n%lf\n", passengers[0].seatPos.x, passengers[1].seatPos.x, passengers[2].seatPos.x, passengers[3].seatPos.x, passengers[4].seatPos.x);
 
     return 0;
 }
