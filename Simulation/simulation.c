@@ -90,15 +90,14 @@ void updatePassenger(passenger *pArr, int i) {
 }
 
 void stateLookingForRow(passenger *pArr, int i) {
-    float newX = pArr[i].currPos.x + tickrate;
-    if(newX > pArr[i].seatPos.x) {
-        newX = pArr[i].seatPos.x;
-    }
-
     if(pArr[i].currPos.x == pArr[i].seatPos.x) {
         pArr[i].currState = pArr[i].hasLuggage ? Luggage : Seating;
         return;
     }
+
+    float newX = pArr[i].currPos.x + tickrate;
+    if(newX > pArr[i].seatPos.x)
+        newX = pArr[i].seatPos.x;
 
     int infront = getPassengerAhead(pArr, i);
     if(infront == -1) {
