@@ -2,13 +2,14 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include "..\Header\Simulation.h"
 
 #define WALK_SPEED 1
 #define LUGGAGE_STORE_TIME 1
-#define CROSS_PASSENGER_TIME 0 
-#define SIT_TIME 0 
+#define CROSS_PASSENGER_TIME 0
+#define SIT_TIME 0
 #define PERSONAL_SPACE 1
-#define DIST_TO_FIRST_ROW 1.91 
+#define DIST_TO_FIRST_ROW 1.91
 #define ROW_WIDTH 0.8128
 #define ROW_WIDTH_SPECIAL 1.0321    /* Row width for rows 1, 16 & 17 */
 #define SEAT_WIDTH 1
@@ -21,11 +22,11 @@ struct point {
 } point;
 
 typedef
-enum state { 
-    LookingForRow = 0, 
-    Luggage, 
-    Seating, 
-    Idle 
+enum state {
+    LookingForRow = 0,
+    Luggage,
+    Seating,
+    Idle
 } state;
 
 typedef
@@ -60,12 +61,12 @@ float runSimulation(passenger *pArr, int n) {
 
         for(int i = 0; i < n; ++i) {
             // If the passenger is idle do nothing
-            if(pArr[i].currState == Idle) 
+            if(pArr[i].currState == Idle)
                 continue;
 
-            if(pArr[i].ticksToWait > 0) 
+            if(pArr[i].ticksToWait > 0)
                 pArr[i].ticksToWait--;
-            else 
+            else
                 updatePassenger(pArr, i);
         }
 
@@ -125,7 +126,7 @@ void stateSeating(passenger *pArr, int i) {
 //Returns -1 if no passenger is ahead.
 int getPassengerAhead(passenger *pArr, int pIndex) {
     for(int i = pIndex - 1; i >= 0; --i) {
-        if(pArr[i].currState != Idle) 
+        if(pArr[i].currState != Idle)
             return i;
     }
     return -1;
@@ -139,8 +140,8 @@ float getTimestep(void) {
 }
 
 /* Found on Stack Exchange. */
-double gcd(double a, double b) { 
-    if (a < b) return gcd(b, a); 
-    if (fabs(b) < 0.001) return a; 
-    else return (gcd(b, a - floor(a / b) * b)); 
-} 
+double gcd(double a, double b) {
+    if (a < b) return gcd(b, a);
+    if (fabs(b) < 0.001) return a;
+    else return (gcd(b, a - floor(a / b) * b));
+}

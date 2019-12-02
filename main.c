@@ -1,6 +1,6 @@
-#include "Headers/BoardingAlgorithms.h"
-#include "Headers/Gather.h"
-#include "Headers/Simulation.h"
+#include "Header/BoardingAlgorithms.h"
+#include "Header/Gather.h"
+#include "Header/Simulation.h"
 
 #include <stdlib.h>
 #include <stdio.h>
