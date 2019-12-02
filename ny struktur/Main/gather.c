@@ -72,6 +72,8 @@ void readinput(passenger* passengers){
 
     passengers = calloc(p, sizeof(passenger));
 
+    printf("%d\n", p);
+
     /*if (testFile != NULL) {
         while ((ch = fgetc(testFile)) != EOF && (ch = fgetc(testFile)) != 'A') {
                 passengers[i].seatPos.x = ch;
