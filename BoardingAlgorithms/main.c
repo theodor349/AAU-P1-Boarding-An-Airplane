@@ -7,7 +7,7 @@
 
 typedef
 struct point {
-    float x, y;
+    int x, y;
 } point;
 
 typedef
@@ -55,7 +55,7 @@ int binary_search(passenger *sorted_passengers, int seat, int row, int num_passe
 void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
 
 
-int getSpot(int *takenSpots, int numPassengers);
+int getRandomSpot(int *takenSpots, int numPassengers);
 
 void CopyArray(passenger *to, passenger *from, int num);
 
@@ -77,9 +77,12 @@ int main()
 void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure)
 {
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
+    // Copy all passengers to a new array
     CopyArray(passengersCopy, passengers, numPassengers);
+    // Sort the new array
     qsort(passengersCopy, numPassengers, sizeof(passengers[0]), (compfn)passengerCompare);
 
+    // Call the correct procedure
     switch (procedure)
     {
         case Random:
@@ -91,6 +94,7 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
     }
 }
 
+// Copies an array over to a new array
 void CopyArray(passenger *to, passenger *from, int num)
 {
     for (int i = 0; i < num; ++i)
@@ -99,14 +103,19 @@ void CopyArray(passenger *to, passenger *from, int num)
     }
 }
 
+// Shuffles the passengers randomly
 void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers)
 {
     int* takeSpots = calloc(numPassengers, sizeof(int));
 
+    // For each passenger
     for (int i = 0; i < numPassengers; ++i)
     {
-        int spot = getSpot(takeSpots, numPassengers);
+        // Get a random seat
+        int spot = getRandomSpot(takeSpots, numPassengers);
+        // Assign the passenger
         passengers[spot] = sortedPassengers[i];
+        // Increment taken spots
         takeSpots[i] = 1;
     }
 }
@@ -118,9 +127,11 @@ int binary_search(passenger *sorted_passengers, int seat, int row, int num_passe
     return 1;
 }
 
-int getSpot(int *takenSpots, int numPassengers)
+// returns a random index which is not taken
+int getRandomSpot(int *takenSpots, int numPassengers)
 {
     int index = rand() % numPassengers;
+    // Increment by 1 while spot is not taken
     while (takenSpots[index])
     {
         index++;
@@ -130,16 +141,18 @@ int getSpot(int *takenSpots, int numPassengers)
     return index;
 }
 
+// Compares two passengers
 int passengerCompare(passenger* a, passenger* b)
 {
+    // Row
     int r = a->seatPos.x - b->seatPos.y;
     if(r != 0)
         return r;
 
+    // Place in row A (A B C, F E D)
     int ay = a->seatPos.y < 4 ? a->seatPos.y + 6 : a->seatPos.y;
     int by = b->seatPos.y < 4 ? b->seatPos.y + 6 : b->seatPos.y;
-
-    return  ay -by;
+    return  ay - by;
 }
 
 /*
@@ -150,7 +163,7 @@ void printPassenger(passenger passengers[3])
 {
     for (int i = 0; i < 3; ++i)
     {
-        printf("%d row: %d, seat %c\n", i, (int) passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
+        printf("%d row: %d, seat %c\n", i, passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
     }
 }
 
