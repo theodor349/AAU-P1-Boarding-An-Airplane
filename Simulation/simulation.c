@@ -60,13 +60,16 @@ void updatePassenger(passenger *pArr, int i) {
 }
 
 void stateLookingForRow(passenger *pArr, int i) {
+
+    float moveRate = 1f; // fix moveRate, might be wrong. Was undefined
+
     if(pArr[i].currPos.x == pArr[i].seatPos.x) {
         pArr[i].currState = pArr[i].hasLuggage ? Luggage : Seating;
         return;
     }
 
-    // fix tick, might be wrong. Was tickrate
-    float newX = pArr[i].currPos.x + tick;
+    // fix moveRate, might be wrong. Was tickrate
+    float newX = pArr[i].currPos.x + moveRate;
     if(newX > pArr[i].seatPos.x)
         newX = pArr[i].seatPos.x;
 
