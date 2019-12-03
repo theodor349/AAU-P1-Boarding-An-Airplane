@@ -66,7 +66,7 @@ int main()
     generatePassengers(passengers);
     printPassenger(passengers);
 
-    QueuePassengers(passengers, 3, Random);
+    QueuePassengers(passengers, 3, SteffenModified);
 
     printf("\n");
     printPassenger(passengers);
@@ -112,7 +112,7 @@ void random_Que(passenger *passengers, passenger *sortedPassengers, int numPasse
     }
 }
 
-void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers){
+void steffen_Que(passenger *passengers, passenger *sorted_passengers, int numPassengers){
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
     int group = 0, row  = 0, seat = 0, check, place_in_que = 0, ps_nr = 0;
 
@@ -125,7 +125,8 @@ void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPas
                     check += 3;
                 }
                 ps_nr = binary_search(sorted_passengers, seat, row ,numPassengers);
-                passengers[0] = sorted_passengers[ps_nr];
+                if(ps_nr >= 0)
+                    passengers[0] = sorted_passengers[ps_nr];
 
             }
             
@@ -138,16 +139,17 @@ void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPas
 int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers){
     int result = 0, i, middle_nr_rows = 33/2, middle_nr_seats = 189/2, middle_num_passengers = num_passengers/2;
     if (sorted_passengers[middle_num_passengers].seatPos.x > row)
-        binary_search(sorted_passengers, seat, row, middle_num_passengers);
+        binary_search(sorted_passengers, seat, row, middle_nr_rows);
 
-    else if (sorted_passengers[middle_num_passengers].seatPos.x < row)
-        binary_search(sorted_passengers, seat, row, middle_num_passengers);
+    else if (sorted_passengers[middle_num_passengers].seatPos.y < middle_nr_rows)
+        binary_search(sorted_passengers, seat, row, middle_nr_rows);
 
-    else if (sorted_passengers[middle_num_passengers].seatPos.x == row){
+    else if (sorted_passengers[middle_num_passengers].seatPos.y == middle_nr_rows){
                 result = sorted_passengers[middle_num_passengers].seatPos.x;
     }
-    result = sorted_passengers;
-
+    else
+        result = -1;
+    
     return result;
 }
 
@@ -178,11 +180,6 @@ int passengerCompare(passenger* a, passenger* b)
 /*
  * Dummy stuff :D
  */
-
-void steffen_Que(passenger *pPassenger, passenger *pPassenger1, int passengers)
-{
-
-}
 
 
 void printPassenger(passenger passengers[3])
