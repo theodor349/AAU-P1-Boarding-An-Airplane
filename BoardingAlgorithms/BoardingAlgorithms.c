@@ -186,6 +186,7 @@ char GetSeatName(seatLetter letter)
         case F:
             return 'F';
     }
+    return "\0";
 }
 
 void generatePassengers(passenger passengers[3])
