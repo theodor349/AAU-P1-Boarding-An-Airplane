@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <math.h>
-#include "..\Header\Simulation.h"
+#include "..\Header.h"
 
 #define WALK_SPEED 1
 #define LUGGAGE_STORE_TIME 1
@@ -15,12 +11,6 @@
 #define SEAT_WIDTH 1
 #define MAX_ROWS 33
 #define MAX_SEATS 189
-
-// This is here temporarily so we can compile the file and see if there are any errors
-// compile with:     -std=c99 -pedantic -Wall
-int main(void) {
-    return 0;
-}
 
 float runSimulation(passenger *pArr, int n) {
     int tick = 0, seatedPassengers = 0;
@@ -57,42 +47,6 @@ void updatePassenger(passenger *pArr, int i) {
             printf("Something weird happened\n");
             break;
     }
-}
-
-void stateLookingForRow(passenger *pArr, int i) {
-
-    float moveRate = 1f; // fix moveRate, might be wrong. Was undefined
-
-    if(pArr[i].currPos.x == pArr[i].seatPos.x) {
-        pArr[i].currState = pArr[i].hasLuggage ? Luggage : Seating;
-        return;
-    }
-
-    // fix moveRate, might be wrong. Was tickrate
-    float newX = pArr[i].currPos.x + moveRate;
-    if(newX > pArr[i].seatPos.x)
-        newX = pArr[i].seatPos.x;
-
-    int infront = getPassengerAhead(pArr, i);
-    if(infront == -1) {
-        pArr[i].currPos.x = newX;
-    } else {
-        if(pArr[infront].currPos.x - newX >= PERSONAL_SPACE) {
-            pArr[i].currPos.x = newX;
-        }
-    }
-}
-
-void stateLuggage(passenger *pArr, int i) {
-    pArr[i].hasLuggage = false;
-    pArr[i].ticksToWait = LUGGAGE_STORE_TIME / getTimestep();
-    pArr[i].currState = Seating;
-}
-
-void stateSeating(passenger *pArr, int i) {
-
-    //DO SOMETHING WITH THE PASSENGER "pArr[i]"
-
 }
 
 //Returns the index of the passenger ahead of the passenger with index pIndex.
