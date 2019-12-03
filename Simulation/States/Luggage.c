@@ -1,9 +1,9 @@
 #include "..\..\Header\Simulation.h"
 
 
-void stateLuggage(passenger p) {
+void stateLuggage(passenger *pArr, int i) {
 
     //DO SOMETHING WITH THE PASSENGER "P"
 
-    return p;
+    return;
 }
