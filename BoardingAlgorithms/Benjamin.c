@@ -53,7 +53,7 @@ void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingPr
 int passengerCompare(passenger* a, passenger* b);
 void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers);
 void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
-passenger binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers);
+int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers);
 
 
 int getSpot(int *takenSpots, int numPassengers);
@@ -112,41 +112,44 @@ void random_Que(passenger *passengers, passenger *sortedPassengers, int numPasse
     }
 }
 
-void steffen_Que(passenger *passengers, passenger *sorted_passengers, int numPassengers)
-{
+void steffen_Que(passenger *passengers, passenger *sorted_passengers, int numPassengers){
+    passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
     int group = 0, row  = 0, seat = 0, check, place_in_que = 0, ps_nr = 0;
 
-    for ( group = 0; group < 4; group++)
-    {
-        for (row = (33 - (group/2)); row > 0 ; row-2)
-        {
+    for ( group = 0; group < 4; group++){
+        for (row = (33 - (group/2)); row > 0 ; row-2){
             check = 0;
-            for (seat = A ; seat > check; seat--)
-            {
-                if (group % 2 != 0)
-                {
+            for (seat = A ; seat > check; seat--){
+                if (group % 2 != 0){
                     seat += 3;
                     check += 3;
                 }
-                passengers[0] = binary_search(sorted_passengers, seat, row ,numPassengers);
+                ps_nr = binary_search(sorted_passengers, seat, row ,numPassengers);
+                if(ps_nr >= 0)
+                    passengers[0] = sorted_passengers[ps_nr];
+
             }
+            
         }
+        
     }
+    
 }
 
-passenger binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers)
-{
-    int i, middle_nr_rows = 33/2, middle_nr_seats = 189/2, middle_num_passengers = num_passengers/2;
-    passenger result;
+int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers){
+    int result = 0, i, middle_nr_rows = 33/2, middle_nr_seats = 189/2, middle_num_passengers = num_passengers/2;
     if (sorted_passengers[middle_num_passengers].seatPos.x > row)
-        return binary_search(sorted_passengers, seat, row, middle_num_passengers);
-    else if (sorted_passengers[middle_num_passengers].seatPos.x < row)
-        return binary_search(sorted_passengers, seat, row, middle_num_passengers);
-    else if (sorted_passengers[middle_num_passengers].seatPos.x == row)
-        result = sorted_passengers[middle_num_passengers];
+        binary_search(sorted_passengers, seat, row, middle_nr_rows);
 
-    result = sorted_passengers[middle_num_passengers];
+    else if (sorted_passengers[middle_num_passengers].seatPos.y < middle_nr_rows)
+        binary_search(sorted_passengers, seat, row, middle_nr_rows);
 
+    else if (sorted_passengers[middle_num_passengers].seatPos.y == middle_nr_rows){
+                result = sorted_passengers[middle_num_passengers].seatPos.x;
+    }
+    else
+        result = -1;
+    
     return result;
 }
 
@@ -177,6 +180,7 @@ int passengerCompare(passenger* a, passenger* b)
 /*
  * Dummy stuff :D
  */
+
 
 void printPassenger(passenger passengers[3])
 {
