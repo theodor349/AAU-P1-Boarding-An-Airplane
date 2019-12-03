@@ -65,7 +65,8 @@ void stateLookingForRow(passenger *pArr, int i) {
         return;
     }
 
-    float newX = pArr[i].currPos.x + tickrate;
+    // fix tick, might be wrong. Was tickrate
+    float newX = pArr[i].currPos.x + tick;
     if(newX > pArr[i].seatPos.x)
         newX = pArr[i].seatPos.x;
 
@@ -74,7 +75,7 @@ void stateLookingForRow(passenger *pArr, int i) {
         pArr[i].currPos.x = newX;
     } else {
         if(pArr[infront].currPos.x - newX >= PERSONAL_SPACE) {
-            pArr[i].position.x = newX;
+            pArr[i].currPos.x = newX;
         }
     }
 }
