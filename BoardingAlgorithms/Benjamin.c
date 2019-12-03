@@ -1,7 +1,3 @@
-
-//    steffen benjamin
-//    binary search benjamin
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -53,7 +49,7 @@ void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingPr
 int passengerCompare(passenger* a, passenger* b);
 void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers);
 void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
-int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers);
+int binary_search(passenger *sorted_passengers, seatLetter seat, int row, int num_passengers);
 
 
 int getSpot(int *takenSpots, int numPassengers);
@@ -70,13 +66,12 @@ int main()
 
     printf("\n");
     printPassenger(passengers);
-
     return 0;
 }
 
 // CALLED FROM MAIN FUNCTION
-void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedure procedure)
-{
+void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedure procedure){
+    int i;
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
     CopyArray(passengersCopy, passengers, numPassengers);
     qsort(passengersCopy, numPassengers, sizeof(passengers[0]), (compfn)passengerCompare);
@@ -92,8 +87,7 @@ void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedu
     }
 }
 
-void CopyArray(passenger *to, passenger *from, int num)
-{
+void CopyArray(passenger *to, passenger *from, int num){
     for (int i = 0; i < num; ++i)
     {
         to[i] = from[i];
@@ -117,7 +111,7 @@ void steffen_Que(passenger *passengers, passenger *sorted_passengers, int numPas
     int group = 0, row  = 0, seat = 0, check, place_in_que = 0, ps_nr = 0;
 
     for ( group = 0; group < 4; group++){
-        for (row = (33 - (group/2)); row > 0 ; row-2){
+        for (row = (33 - (group/2)); row > 0 ; row -= 2){
             check = 0;
             for (seat = A ; seat > check; seat--){
                 if (group % 2 != 0){
@@ -125,32 +119,34 @@ void steffen_Que(passenger *passengers, passenger *sorted_passengers, int numPas
                     check += 3;
                 }
                 ps_nr = binary_search(sorted_passengers, seat, row ,numPassengers);
-                if(ps_nr >= 0)
-                    passengers[0] = sorted_passengers[ps_nr];
-
+                if(ps_nr >= 0){
+                    passengers[place_in_que] = sorted_passengers[ps_nr];
+                    place_in_que++;
+                }
             }
-            
         }
-        
     }
-    
 }
 
-int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers){
-    int result = 0, i, middle_nr_rows = 33/2, middle_nr_seats = 189/2, middle_num_passengers = num_passengers/2;
-    if (sorted_passengers[middle_num_passengers].seatPos.x > row)
-        binary_search(sorted_passengers, seat, row, middle_nr_rows);
-
-    else if (sorted_passengers[middle_num_passengers].seatPos.y < middle_nr_rows)
-        binary_search(sorted_passengers, seat, row, middle_nr_rows);
-
-    else if (sorted_passengers[middle_num_passengers].seatPos.y == middle_nr_rows){
-                result = sorted_passengers[middle_num_passengers].seatPos.x;
+int binary_search(passenger *sorted_passengers, seatLetter seat, int row, int num_passengers){
+    int left = 0, right = num_passengers, middle;
+    while (left < right){
+        middle = (left + right)/2;
+        int r = sorted_passengers[middle].seatPos.x;
+        if (sorted_passengers[middle].seatPos.x < row)            
+            left = middle + 1;
+        else if (sorted_passengers[middle].seatPos.x == row){
+            if (sorted_passengers[middle].seatPos.y < seat)
+                right = middle;
+            else if (sorted_passengers[middle].seatPos.y == seat)
+                return middle;
+            else 
+                left = middle;
+        }
+        else
+            right = middle;
     }
-    else
-        result = -1;
-    
-    return result;
+    return -1;
 }
 
 int getSpot(int *takenSpots, int numPassengers)
