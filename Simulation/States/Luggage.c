@@ -1,7 +1,7 @@
 #include "..\..\Header\Simulation.h"
 
 
-passenger stateLuggage(passenger p) {
+void stateLuggage(passenger p) {
 
     //DO SOMETHING WITH THE PASSENGER "P"
 
