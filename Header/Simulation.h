@@ -9,11 +9,11 @@ struct point {
 } point;
 
 typedef
-enum state { 
-    LookingForRow = 0, 
-    Luggage, 
-    Seating, 
-    Idle 
+enum state {
+    LookingForRow = 0,
+    Luggage,
+    Seating,
+    Idle
 } state;
 
 typedef
@@ -26,10 +26,10 @@ struct passenger {
 } passenger;
 
 float runSimulation(passenger *pArr, int n);
-passenger updatePassenger(passenger p);
-passenger stateLookingForRow(passenger p);
-passenger stateLuggage(passenger p);
-passenger stateSeating(passenger p);
+void updatePassenger(passenger *pArr, int i);
+void stateLookingForRow(passenger *pArr, int i);
+void stateLuggage(passenger *pArr, int i);
+void stateSeating(passenger *pArr, int i);
 int getPassengerAhead(passenger *pArr, int pIndex);
 float getTimestep(void);
 double gcd(double a, double b);
