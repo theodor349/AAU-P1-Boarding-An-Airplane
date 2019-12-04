@@ -9,13 +9,6 @@ void stateSeating(passenger *pArr, int i) {
 	int Sp = abs(pArr[getClosestToAisle(pArr, sizeof(pArr) / sizeof(pArr[0]), i)].seatPos.y);
 
     //pArr[i].ticksToWait = 2*(O + Sp) -
-
-    /*
-
-	ticksToWait = distToSeat + foreach passenger in the way {2 * distToAisle}
-
-    */ 
-
 }
 
 void countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
