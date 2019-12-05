@@ -48,8 +48,8 @@ void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPass
 char GetSeatName(seatLetter letter);
 void QueuePassengers(passenger passengers[3], int numPassengers, enum boardingProcedure procedure);
 int passengerCompare(passenger* a, passenger* b);
-void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers);
-void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
+void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers);
+void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers);
 int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers);
 
 
@@ -80,7 +80,7 @@ void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedu
     switch (procedure)
     {
         case Random:
-            random_Que(passengers, passengersCopy, numPassengers);
+            randomQue(passengers, passengersCopy, numPassengers);
             break;
         case SteffenModified:
             steffenQue(passengers, passengersCopy, numPassengers);
@@ -96,7 +96,7 @@ void CopyArray(passenger *to, passenger *from, int num){
     }
 }
 
-void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers)
+void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers)
 {
     int* takeSpots = calloc(numPassengers, sizeof(int)), i;
 
