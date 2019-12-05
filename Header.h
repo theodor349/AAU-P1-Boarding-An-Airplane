@@ -43,10 +43,10 @@ typedef int (*compfn)(const void*, const void*);
 
 // Simulation
 float runSimulation(passenger *pArr, int n);
-void updatePassenger(passenger *pArr, int i);
+void updatePassenger(passenger *pArr, int pArrSize, int i);
 void stateLookingForRow(passenger *pArr, int i);
 void stateLuggage(passenger *pArr, int i);
-void stateSeating(passenger *pArr, int i);
+void stateSeating(passenger *pArr, int pArrSize, int i);
 int getPassengerAhead(passenger *pArr, int pIndex);
 
 // BoardingProcedure

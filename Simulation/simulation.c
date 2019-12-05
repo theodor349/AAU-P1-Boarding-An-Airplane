@@ -22,7 +22,7 @@ float runSimulation(passenger *pArr, int n) {
             if(pArr[i].ticksToWait > 0)
                 pArr[i].ticksToWait--;
             else
-                updatePassenger(pArr, i);
+                updatePassenger(pArr, n, i);
         }
 
         tick++;
@@ -31,7 +31,7 @@ float runSimulation(passenger *pArr, int n) {
     return tick * TIMESTEP_IN_SECONDS;
 }
 
-void updatePassenger(passenger *pArr, int i) {
+void updatePassenger(passenger *pArr, int pArrSize, int i) {
     switch(pArr[i].currState) {
         case LookingForRow:
             stateLookingForRow(pArr, i);
@@ -40,7 +40,7 @@ void updatePassenger(passenger *pArr, int i) {
             stateLuggage(pArr, i);
             break;
         case Seating:
-            stateSeating(pArr, i);
+            stateSeating(pArr, pArrSize, i);
             break;
         default:
             printf("Error on passenger state assignment\n");
