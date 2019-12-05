@@ -23,7 +23,6 @@ void countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
 	return n;
 }
 
-*
 int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	int closestI, dist = 999;
 	for(int i = 0; i < pArrSize; i++) {
@@ -39,4 +38,3 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	}
 	return closestI;
 }
-*/
