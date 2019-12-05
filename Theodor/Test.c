@@ -5,12 +5,9 @@ void testFunction();
 void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers);
 void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers);
 int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers);
-
-int main()
-{
-    testFunction();
-    return 1;
-}
+int passengerCompare(passenger* a, passenger* b);
+int getRandomSpot(int *takenSpots, int numPassengers);
+void CopyArray(passenger *to, passenger *from, int num);
 
 void testFunction()
 {
