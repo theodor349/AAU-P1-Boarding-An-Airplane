@@ -48,8 +48,6 @@ void stateLookingForRow(passenger *pArr, int i);
 void stateLuggage(passenger *pArr, int i);
 void stateSeating(passenger *pArr, int i);
 int getPassengerAhead(passenger *pArr, int pIndex);
-float getTimestep(void);
-double gcd(double a, double b);
 
 // BoardingProcedure
 char GetSeatName(seatLetter letter);

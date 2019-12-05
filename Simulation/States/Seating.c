@@ -1,20 +1,26 @@
 #include "..\..\Header.h"
 
-void countPassengersInWay(passenger *pArr, int pArrSize, int pI);
+int countPassengersInRow(passenger *pArr, int pArrSize, int pI);
 int getClosestToAisle(passenger *pArr, int pArrSize, int pI);
 
 void stateSeating(passenger *pArr, int i) {
+	if(pArr[i].currPos.y == pArr[i].seatPos.y) {
+		pArr[i].currState = Idle;
+		return;
+	}
 
-	//int O = countPassengersInRow(pArr, sizeof(pArr) / sizeof(pArr[0]), i);
-	// int Sp = abs(pArr[getClosestToAisle(pArr, sizeof(pArr) / sizeof(pArr[0]), i)].seatPos.y);
+	int pArrSize = sizeof pArr / sizeof *pArr;
+	int O = countPassengersInRow(pArr, pArrSize, i);
+	int Sp = abs(pArr[getClosestToAisle(pArr, pArrSize, i)].seatPos.y);
 
-    //pArr[i].ticksToWait = 2*(O + Sp) -
+    pArr[i].ticksToWait = 2*(O + Sp) - (Sp - 1);
+    pArr[i].currPos.y = pArr[i].seatPos.y;
 }
-/*
-void countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
+
+int countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
 	int n = 0;
 	for(int i = 0; i < pArrSize; i++) {
-		if(pArr[i].isSeated && pArr[i].currPos.x == pArr[pI].seatPos.x) {
+		if(pArr[i].currState == Idle && pArr[i].currPos.x == pArr[pI].seatPos.x) {
 			if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
 			   (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0))
                 n++;
@@ -22,12 +28,11 @@ void countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
 	}
 	return n;
 }
-*/
-/*
+
 int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	int closestI, dist = 999;
 	for(int i = 0; i < pArrSize; i++) {
-		if(pArr[i].isSeated && pArr[i].currPos.x == pArr[pI].seatPos.x) {
+		if(pArr[i].currState == Idle && pArr[i].currPos.x == pArr[pI].seatPos.x) {
 			if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
 			   (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0)) {
 				if(abs(pArr[i].seatPos.y) < dist) {
@@ -39,4 +44,3 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	}
 	return closestI;
 }
-*/
