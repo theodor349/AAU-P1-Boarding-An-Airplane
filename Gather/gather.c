@@ -7,20 +7,22 @@
 
 int gather(void) {
     passenger *passengerArray;
-    int passengerAmount = getPassengerAmount();
+    FILE *testFile;
+    int passengerAmount = 0;
 
+    testFile = fopen("passengertest.txt", "r");
+    passengerAmount = getPassengerAmount(testFile);
+
+// remeber to free
     passengerArray = calloc(passengerAmount, sizeof(passenger));
+    readFile(passengerArray, testFile);
 
 
-    free(passengerArray);
     return 0;
 }
 
-int getPassengerAmount(void){
-    FILE *testFile;
+int getPassengerAmount(FILE *testFile){
     int ch, passengerAmount = 0;
-
-    testFile = fopen("passengertest.txt", "r");
 
     if (testFile != NULL) {
         while ((ch = fgetc(testFile)) != EOF) {
@@ -41,5 +43,11 @@ int getPassengerAmount(void){
 
     printf("%d\n", q);
 */
+}
+
+void readFile(passenger *passengerArray, FILE *testFile) {
+    if (testFile != NULL) {
+        
+    }
 
 }
