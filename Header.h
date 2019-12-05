@@ -52,12 +52,6 @@ int getPassengerAhead(passenger *pArr, int pIndex);
 // BoardingProcedure
 char GetSeatName(seatLetter letter);
 void QueuePassengers(passenger* passengers, int numPassengers, enum boardingProcedure procedure);
-int passengerCompare(passenger* a, passenger* b);
-void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers);
-int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers);
-void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers);
-int getRandomSpot(int *takenSpots, int numPassengers);
-void CopyArray(passenger *to, passenger *from, int num);
 // Dummy
 void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
