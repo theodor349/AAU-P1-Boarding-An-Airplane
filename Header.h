@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 #include <math.h>
 
@@ -23,7 +22,7 @@ struct passenger {
     point seatPos;
     state currState;
     int ticksToWait;
-    bool hasLuggage;
+    int hasLuggage;
 } passenger;
 
 typedef
@@ -59,4 +58,4 @@ void printPassenger(passenger passengers[3]);
 //gather
 int getPassengerAmount(FILE *testFile);
 int gather(void);
-void readFile(passenger *passengerArray, FILE *testFile);
+void readFile(passenger *passengerArray, FILE *testFile, int passengerAmount);
