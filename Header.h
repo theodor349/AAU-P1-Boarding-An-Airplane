@@ -59,4 +59,4 @@ void printPassenger(passenger passengers[3]);
 //gather
 int getPassengerAmount(FILE *testFile);
 int gather(void);
-void readFile(passenger *passengerArray);
+void readFile(passenger *passengerArray, FILE *testFile);
