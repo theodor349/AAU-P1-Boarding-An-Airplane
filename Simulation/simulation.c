@@ -8,13 +8,13 @@
 #define MAX_SEATS 189
 #define TIMESTEP_IN_SECONDS 1
 
-float runSimulation(passenger *pArr, int n) {
+float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
     //Keep ticking until all passengers are seated
-    while(seatedPassengers < n) {
+    while(seatedPassengers < pArrSize) {
 
-        for(int i = 0; i < n; ++i) {
+        for(int i = 0; i < pArrSize; ++i) {
             // If the passenger is idle do nothing
             if(pArr[i].currState == Idle)
                 continue;
@@ -22,19 +22,19 @@ float runSimulation(passenger *pArr, int n) {
             if(pArr[i].ticksToWait > 0)
                 pArr[i].ticksToWait--;
             else
-                updatePassenger(pArr, n, i);
+                updatePassenger(pArr, pArrSize, i);
+
+            if(pArr[i].currState == Idle)
+                seatedPassengers++;
 
             /*
             printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
             pArr[i].currPos.x, pArr[i].currPos.y, 
             pArr[i].seatPos.x, pArr[i].seatPos.y,
             (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
-            */
-
-            if(pArr[i].currState == Idle)
-                seatedPassengers++;
+            */            
         }
-        printf("\n");
+
         tick++;
     }
 
