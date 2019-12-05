@@ -61,7 +61,7 @@ void QueuePassengers(passenger* passengers, int numPassengers, enum boardingProc
 void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
 
-//gather
-int getPassengerAmount(FILE *testFile);
-int gather(void);
-void readFile(passenger *passengerArray, FILE *testFile, int passengerAmount);
+//Gather
+int getPassengerAmount(FILE *passengerSource);
+passenger* gather(FILE *passengerSource);
+void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmount);

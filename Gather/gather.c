@@ -5,56 +5,43 @@
 
 
 
-int gather(void) {
+passenger* gather(FILE *passengerSource) {
     passenger *passengerArray;
-    FILE *testFile;
     int passengerAmount = 0;
-
-    testFile = fopen("passengertest.txt", "r");
-    passengerAmount = getPassengerAmount(testFile);
+    
+    passengerAmount = getPassengerAmount(passengerSource);
 
 // remeber to free
     passengerArray = calloc(passengerAmount, sizeof(passenger));
-    readFile(passengerArray, testFile, passengerAmount);
+    readFile(passengerArray, passengerSource, passengerAmount);
 
     printf("x = %d luggage(0, 1) = %d %d\n", passengerArray[10].seatPos.x, passengerArray[10].hasLuggage, passengerArray[10].seatPos.y);
     printf("passengerAmount = %d\n", passengerAmount);
-    return 0;
+    return passengerArray;
 }
 
-int getPassengerAmount(FILE *testFile) {
+int getPassengerAmount(FILE *passengerSource) {
     int ch, passengerAmount = 0;
 
-    if (testFile != NULL) {
-        while ((ch = fgetc(testFile)) != EOF) {
+    if (passengerSource != NULL) {
+        while ((ch = fgetc(passengerSource)) != EOF) {
             if (ch == '\n') {
                 passengerAmount += 1;
             }
         }
     }
     return passengerAmount;
-    // for testing purposes
-    // printf("%lf\n%lf\n%lf\n%lf\n%lf\n", passengers[0].seatPos.x, passengers[1].seatPos.x, passengers[2].seatPos.x, passengers[3].seatPos.x, passengers[4].seatPos.x);
-
-
-    /*
-        if (fgets(line, LENGTH, testFile) != NULL) {
-                sscanf(line, " %d", &q);
-        }
-
-        printf("%d\n", q);
-    */
 }
 
-void readFile(passenger *passengerArray, FILE *testFile, int passengerAmount) {
+void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmount) {
     char tempChar = 0;
     int i = 0;
 
-    rewind(testFile);
+    rewind(passengerSource);
 
-    if (testFile != NULL) {
+    if (passengerSource != NULL) {
         for (i = 0; i < passengerAmount; i++) {
-            fscanf(testFile, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &passengerArray[i].hasLuggage);
+            fscanf(passengerSource, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &passengerArray[i].hasLuggage);
 
             switch (tempChar) {
                 case 'A':
