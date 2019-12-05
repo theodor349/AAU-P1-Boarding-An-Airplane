@@ -3,31 +3,32 @@
 #define MAX_SEATS 189
 #define LENGTH 10
 
-void readinput(passenger* passengers);
-int gather();
+void readinput(passenger *passengers);
+int gather(void);
 
-int gather(void){
-    passenger passengers;
+int gather(void) {
+    int p = 0;
+    passenger *passengers;
+    passengers = calloc(p, sizeof(passenger));
     readinput(passengers);
 
-    free(passengers);
+
     return 0;
 }
 
-void readinput(passenger* passengers){
+void readinput(passenger *passengers){
     FILE *testFile;
+    int q;
     char line[LENGTH];
-    int p = 0;
+
 
     testFile = fopen("passengertest.txt", "r");
 
     if (fgets(line, LENGTH, testFile) != NULL) {
-            sscanf(line, " %d", &p);
+            sscanf(line, " %d", &q);
     }
 
-    passengers = calloc(p, sizeof(passenger));
-
-    printf("%d\n", p);
+    printf("%d\n", q);
 
     /*if (testFile != NULL) {
         while ((ch = fgetc(testFile)) != EOF && (ch = fgetc(testFile)) != 'A') {
