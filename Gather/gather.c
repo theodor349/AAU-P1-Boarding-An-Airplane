@@ -7,10 +7,10 @@ void readinput(passenger* passengers);
 int gather();
 
 int gather(void){
-    //passenger passengers;
-    //readinput(passengers);
+    passenger passengers;
+    readinput(passengers);
 
-    //free(passengers);
+    free(passengers);
     return 0;
 }
 
