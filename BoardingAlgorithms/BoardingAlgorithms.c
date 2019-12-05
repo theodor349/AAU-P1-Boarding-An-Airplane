@@ -2,8 +2,8 @@
 // Created by Theodor Risager on 29-11-2019.
 //
 #include "..\Header.h"
-/*
-int main()
+
+void testFunction()
 {
     passenger passengers[3];
     generatePassengers(passengers);
@@ -16,9 +16,7 @@ int main()
     printf("\n Steffen\n");
     QueuePassengers(passengers, 3, SteffenModified);
     printPassenger(passengers);
-
-    return 0;
-}*/
+}
 
 // CALLED FROM MAIN FUNCTION
 void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure)
