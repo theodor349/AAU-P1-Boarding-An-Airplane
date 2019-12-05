@@ -43,6 +43,8 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
             steffenQue(passengers, passengersCopy, numPassengers);
             break;
     }
+
+    free(passengersCopy);
 }
 
 // Copies an array over to a new array

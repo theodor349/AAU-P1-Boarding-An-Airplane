@@ -9,6 +9,14 @@ struct point {
 } point;
 
 typedef
+struct boardingCalculation {
+    int time;
+    boardingProcedure procedure;
+} boardingCalculation;
+
+
+
+typedef
 enum state {
     LookingForRow = 0,
     Luggage,
@@ -61,7 +69,10 @@ void QueuePassengers(passenger* passengers, int numPassengers, enum boardingProc
 void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
 
-//Gather
+//gather
 int getPassengerAmount(FILE *passengerSource);
 passenger* gather(FILE *passengerSource);
 void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmount);
+
+
+int timeCmp (const void *a, const void *b)
