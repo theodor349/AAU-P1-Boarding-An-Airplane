@@ -9,13 +9,6 @@ int passengerCompare(passenger* a, passenger* b);
 int getRandomSpot(int *takenSpots, int numPassengers);
 void CopyArray(passenger *to, passenger *from, int num);
 
-
-int main()
-{
-    testFunction();
-    return 1;
-}
-
 void testFunction()
 {
     passenger passengers[3];
