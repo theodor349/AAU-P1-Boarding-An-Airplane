@@ -7,7 +7,7 @@ void stateLookingForRow(passenger *pArr, int i) {
     if(pArr[i].currPos.x == pArr[i].seatPos.x) {
         pArr[i].currState = pArr[i].hasLuggage ? Luggage : Seating;
         return;
-    }    
+    }
 
     int infront = getPassengerAhead(pArr, i);
 
@@ -19,4 +19,15 @@ void stateLookingForRow(passenger *pArr, int i) {
             pArr[i].currPos.x += STEP_DISTANCE;
         }
     }
+}
+
+
+//Returns the index of the passenger ahead of the passenger with index pIndex.
+//Returns -1 if no passenger is ahead.
+int getPassengerAhead(passenger *pArr, int pIndex) {
+    for(int i = pIndex - 1; i >= 0; --i) {
+        if(pArr[i].currState != Idle)
+            return i;
+    }
+    return NO_PASSENGERS_AHEAD;
 }
