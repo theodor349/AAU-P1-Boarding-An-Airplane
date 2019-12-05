@@ -714,3 +714,6 @@ CMakeLists.txt
 .idea/**/markdown-navigator/
 
 # End of https://www.gitignore.io/api/clion
+*.o
+
+*.exe

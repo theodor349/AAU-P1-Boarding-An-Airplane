@@ -47,7 +47,13 @@ void updatePassenger(passenger *pArr, int pArrSize, int i);
 void stateLookingForRow(passenger *pArr, int i);
 void stateLuggage(passenger *pArr, int i);
 void stateSeating(passenger *pArr, int pArrSize, int i);
+
+//Looking For Row
 int getPassengerAhead(passenger *pArr, int pIndex);
+
+//Seating
+int countPassengersInRow(passenger *pArr, int pArrSize, int pI);
+int getClosestToAisle(passenger *pArr, int pArrSize, int pI);
 
 // BoardingProcedure
 char GetSeatName(seatLetter letter);
@@ -59,4 +65,4 @@ void printPassenger(passenger passengers[3]);
 //gather
 int getPassengerAmount(FILE *testFile);
 int gather(void);
-void readFile(passenger *passengerArray);
+void readFile(passenger *passengerArray, FILE *testFile);
