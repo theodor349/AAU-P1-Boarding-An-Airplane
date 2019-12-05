@@ -7,7 +7,7 @@ void stateSeating(passenger *pArr, int pArrSize, int i) {
 	}
 
 	int O = countPassengersInRow(pArr, pArrSize, i);
-	if(O != 0) {
+	if(O > 0) {
 		int Sp = abs(pArr[getClosestToAisle(pArr, pArrSize, i)].seatPos.y);
 		pArr[i].ticksToWait = 2*(O + Sp) - (Sp - 1);
 	}
