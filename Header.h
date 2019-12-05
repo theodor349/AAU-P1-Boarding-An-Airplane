@@ -47,7 +47,13 @@ void updatePassenger(passenger *pArr, int pArrSize, int i);
 void stateLookingForRow(passenger *pArr, int i);
 void stateLuggage(passenger *pArr, int i);
 void stateSeating(passenger *pArr, int pArrSize, int i);
+
+//Looking For Row
 int getPassengerAhead(passenger *pArr, int pIndex);
+
+//Seating
+int countPassengersInRow(passenger *pArr, int pArrSize, int pI);
+int getClosestToAisle(passenger *pArr, int pArrSize, int pI);
 
 // BoardingProcedure
 char GetSeatName(seatLetter letter);

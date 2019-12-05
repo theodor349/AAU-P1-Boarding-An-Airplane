@@ -1,8 +1,5 @@
 #include "..\..\Header.h"
 
-int countPassengersInRow(passenger *pArr, int pArrSize, int pI);
-int getClosestToAisle(passenger *pArr, int pArrSize, int pI);
-
 void stateSeating(passenger *pArr, int pArrSize, int i) {
 	if(pArr[i].currPos.y == pArr[i].seatPos.y) {
 		pArr[i].currState = Idle;
