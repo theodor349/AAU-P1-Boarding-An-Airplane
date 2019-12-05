@@ -1,5 +1,6 @@
 #include "..\..\Header.h"
 
+#define NO_PASSENGERS_AHEAD -1
 #define STEP_DISTANCE 1
 
 void stateLookingForRow(passenger *pArr, int i) {
@@ -10,7 +11,7 @@ void stateLookingForRow(passenger *pArr, int i) {
 
     int infront = getPassengerAhead(pArr, i);
 
-    if(infront == -1) {
+    if(infront == NO_PASSENGERS_AHEAD) {
         pArr[i].currPos.x += STEP_DISTANCE;
     } else {
         // If the distance between two passengers is >= 2 Steps, the passenger behind can step forward
