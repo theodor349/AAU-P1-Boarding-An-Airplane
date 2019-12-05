@@ -63,5 +63,6 @@ void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
 
 //gather
-int getPassengerAmount(void);
+int getPassengerAmount(FILE *testFile);
 int gather(void);
+void readFile(passenger *passengerArray);
