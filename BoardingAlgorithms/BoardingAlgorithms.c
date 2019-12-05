@@ -1,7 +1,20 @@
-//
-// Created by Theodor Risager on 29-11-2019.
-//
 #include "..\Header.h"
+#define ROWS 33
+
+void testFunction();
+void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers);
+void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers);
+int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers);
+int passengerCompare(passenger* a, passenger* b);
+int getRandomSpot(int *takenSpots, int numPassengers);
+void CopyArray(passenger *to, passenger *from, int num);
+
+
+int main()
+{
+    testFunction();
+    return 1;
+}
 
 void testFunction()
 {
@@ -31,10 +44,10 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
     switch (procedure)
     {
         case Random:
-            random_Que(passengers, passengersCopy, numPassengers);
+            randomQue(passengers, passengersCopy, numPassengers);
             break;
         case SteffenModified:
-            steffen_que(passengers, passengersCopy, numPassengers);
+            steffenQue(passengers, passengersCopy, numPassengers);
             break;
     }
 }
@@ -49,7 +62,7 @@ void CopyArray(passenger *to, passenger *from, int num)
 }
 
 // Shuffles the passengers randomly
-void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers)
+void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers)
 {
     int* takeSpots = calloc(numPassengers, sizeof(int));
 
@@ -65,11 +78,63 @@ void random_Que(passenger *passengers, passenger *sortedPassengers, int numPasse
     }
 }
 
-void steffen_que(passenger *passengers, passenger *sorted_passengers, int numPassengers){
+void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers)
+{
+    int group, row, seat, check, placeInQue = 0, p;
+
+    // For all groups (Even A-C, UnEven A-C, Even F-D, UnEven F-D)
+    for (group = 0; group < 4; group++){
+        // For every second Row
+        for (row = (ROWS - (group/2)); row > 0 ; row -= 2){
+            check = 0;
+            // Start a the window
+            seat = A;
+            // If F-C increase by 3
+            if (group % 2 != 0){
+                seat += 3;
+                check += 3;
+            }
+            // For each seat from A-C or F-D
+            for (seat; seat > check; seat--){
+                p = binarySearch(sorted_passengers, seat, row, numPassengers);
+                // If a passenger with this Row and Seat is found
+                if(p != -1){
+                    passengers[placeInQue] = sorted_passengers[p];
+                    placeInQue++;
+                }
+            }
+        }
+    }
 }
 
-int binary_search(passenger *sorted_passengers, int seat, int row, int num_passengers){
-    return 1;
+int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers)
+{
+    int left = 0, right = numPassengers, middle;
+    while (left < right){
+        // Get middle
+        middle = (left + right) * 0.5;
+        passenger p = sortedPassengers[middle];
+
+        // If passenger row is less than Row
+        if (p.seatPos.x < row)
+            right = middle;
+            // If passenger row is correct
+        else if (p.seatPos.x == row)
+        {
+            // If passenger seat is less than seat
+            if (p.seatPos.y < seat)
+                left = middle + 1;
+                // If the right seat and row have been found
+            else if (p.seatPos.y == seat)
+                return middle;
+            else
+                right = middle;
+        }
+        else
+            left = middle + 1;
+    }
+    // Return -1 if nothing was found
+    return -1;
 }
 
 // returns a random index which is not taken
