@@ -23,8 +23,18 @@ float runSimulation(passenger *pArr, int n) {
                 pArr[i].ticksToWait--;
             else
                 updatePassenger(pArr, n, i);
-        }
 
+            /*
+            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
+            pArr[i].currPos.x, pArr[i].currPos.y, 
+            pArr[i].seatPos.x, pArr[i].seatPos.y,
+            (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
+            */
+
+            if(pArr[i].currState == Idle)
+                seatedPassengers++;
+        }
+        printf("\n");
         tick++;
     }
 
