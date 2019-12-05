@@ -6,7 +6,7 @@
 
 typedef
 struct point {
-    float x, y;
+    int x, y;
 } point;
 
 typedef
@@ -63,3 +63,7 @@ void CopyArray(passenger *to, passenger *from, int num);
 // Dummy
 void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
+
+//gather
+int getPassengerAmount(void);
+int gather(void);
