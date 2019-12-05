@@ -11,6 +11,10 @@
 float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
+    /*
+    * RUN THROUGH ALL PASSENGERS AND RESET ALL VARIABLES AND CAHNGE LETTERNUMBER TO BE FROM -3 to 3 INSTEAD OF 0 to 6
+    */
+
     //Keep ticking until all passengers are seated
     while(seatedPassengers < pArrSize) {
 
