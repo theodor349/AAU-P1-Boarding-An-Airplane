@@ -5,12 +5,12 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI);
 
 void stateSeating(passenger *pArr, int i) {
 
-	//int O = countPassengersInRow(pArr, sizeof(pArr) / sizeof(pArr[0]), i);
-	// int Sp = abs(pArr[getClosestToAisle(pArr, sizeof(pArr) / sizeof(pArr[0]), i)].seatPos.y);
+	int O = countPassengersInRow(pArr, sizeof(pArr) / sizeof(pArr[0]), i);
+	int Sp = abs(pArr[getClosestToAisle(pArr, sizeof(pArr) / sizeof(pArr[0]), i)].seatPos.y);
 
-    //pArr[i].ticksToWait = 2*(O + Sp) -
+    pArr[i].ticksToWait = 2*(O + Sp) - (Sp - 1);
 }
-/*
+
 void countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
 	int n = 0;
 	for(int i = 0; i < pArrSize; i++) {
@@ -22,8 +22,8 @@ void countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
 	}
 	return n;
 }
-*/
-/*
+
+*
 int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	int closestI, dist = 999;
 	for(int i = 0; i < pArrSize; i++) {
