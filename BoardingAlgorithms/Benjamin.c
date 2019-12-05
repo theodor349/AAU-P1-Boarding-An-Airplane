@@ -88,7 +88,8 @@ void QueuePassengers(passenger passengers[3], int numPassengers, boardingProcedu
 }
 
 void CopyArray(passenger *to, passenger *from, int num){
-    for (int i = 0; i < num; ++i)
+    int i;
+    for ( i = 0; i < num; ++i)
     {
         to[i] = from[i];
     }
@@ -96,9 +97,9 @@ void CopyArray(passenger *to, passenger *from, int num){
 
 void random_Que(passenger *passengers, passenger *sortedPassengers, int numPassengers)
 {
-    int* takeSpots = calloc(numPassengers, sizeof(int));
+    int* takeSpots = calloc(numPassengers, sizeof(int)), i;
 
-    for (int i = 0; i < numPassengers; ++i)
+    for (i = 0; i < numPassengers; ++i)
     {
         int spot = getSpot(takeSpots, numPassengers);
         passengers[spot] = sortedPassengers[i];
@@ -180,7 +181,8 @@ int passengerCompare(passenger* a, passenger* b)
 
 void printPassenger(passenger passengers[3])
 {
-    for (int i = 0; i < 3; ++i)
+    int i;
+    for ( i = 0; i < 3; ++i)
     {
         printf("%d row: %d, seat %c\n", i, (int) passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
     }
