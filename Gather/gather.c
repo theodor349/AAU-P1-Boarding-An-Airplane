@@ -3,20 +3,17 @@
 #define MAX_SEATS 189
 #define LENGTH 10
 
-
-
 passenger* gather(FILE *passengerSource) {
     passenger *passengerArray;
     int passengerAmount = 0;
-    
+
     passengerAmount = getPassengerAmount(passengerSource);
 
-// remeber to free
     passengerArray = calloc(passengerAmount, sizeof(passenger));
     readFile(passengerArray, passengerSource, passengerAmount);
 
-    printf("x = %d luggage(0, 1) = %d %d\n", passengerArray[10].seatPos.x, passengerArray[10].hasLuggage, passengerArray[10].seatPos.y);
-    printf("passengerAmount = %d\n", passengerAmount);
+    // printf("x = %d luggage(0, 1) = %d %d\n", passengerArray[10].seatPos.x, passengerArray[10].hasLuggage, passengerArray[10].seatPos.y);
+    // printf("passengerAmount = %d\n", passengerAmount);
     return passengerArray;
 }
 

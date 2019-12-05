@@ -1,8 +1,5 @@
 #include "..\Header.h"
 
-
-
-int timeCmp (const void *a, const void *b){
-
-    return (*(int*)a->time - *(int*)b->time);
+int timeCmp (boardingCalculation *a, boardingCalculation *b){
+    return (a->time - b->time);
 }

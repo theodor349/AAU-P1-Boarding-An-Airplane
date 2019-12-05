@@ -13,8 +13,8 @@ PROGRAMNAME = Program # replace programName
 
 
 
-$(PROGRAMNAME).exe: $(SIM).o $(GA).o $(BA).o Main.c
-	gcc $(CFLAGS) -o $(PROGRAMNAME) Main.c $(SIM).o $(GA).o $(BA).o Luggage.o Seating.o LookingForRow.o
+$(PROGRAMNAME).exe: $(SIM).o $(GA).o $(BA).o Main.c timeCmp.o
+	gcc $(CFLAGS) -o $(PROGRAMNAME) Main.c $(SIM).o $(GA).o $(BA).o Luggage.o Seating.o LookingForRow.o timeCmp.o
 
 Gather.o: $(GAPATH).c $(H).h
 	gcc $(CFLAGS) -c $(GAPATH).c
@@ -33,6 +33,9 @@ Luggage.o: $(STATEPATH)/Luggage.c $(H).h
 
 Seating.o: $(STATEPATH)/Seating.c $(H).h
 	gcc $(CFLAGS) -c $(STATEPATH)/Seating.c
+
+timeCmp.o: $(GA)/timeCmp.c $(H).h
+	gcc $(CFLAGS) -c $(GA)/timeCmp.c
 
 
 # Removes generated .o files

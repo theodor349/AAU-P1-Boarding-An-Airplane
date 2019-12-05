@@ -5,9 +5,8 @@
 int main (void){
 
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
-    int totalBoardingTime = 0;
 
-    FILE *passengerSource = fopen("paseengerText.txt", "r");
+    FILE *passengerSource = fopen("passengerText.txt", "r");
     passenger *pArray = gather(passengerSource);
     int pAmount = getPassengerAmount(passengerSource);
 
@@ -18,10 +17,7 @@ int main (void){
         boardingCalculations[i].procedure = i;
     }
 
-
-
-
-    qsort(*boardingCalculations, BOARDINGALGORITHMS, sizeof(int), timeCmp);
+    qsort(boardingCalculations, BOARDINGALGORITHMS, sizeof(int), (compfn)timeCmp);
 
     printf("Boarding times in ascending order: \n");
 
@@ -44,12 +40,9 @@ int main (void){
 
         printf("%-20d seconds \n", boardingCalculations[i]);
     }
-
-
-
+    
     free(pArray);
     fclose(passengerSource);
-
 
     return EXIT_SUCCESS;
 }
