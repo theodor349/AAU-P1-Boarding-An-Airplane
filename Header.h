@@ -3,6 +3,10 @@
 #include <string.h>
 #include <math.h>
 
+#define NO_LUGGAGE 0
+#define HAS_LUGGAGE 1
+#define STOWED_AWAY_LUGGAGE 2
+
 typedef
 struct point {
     int x, y;

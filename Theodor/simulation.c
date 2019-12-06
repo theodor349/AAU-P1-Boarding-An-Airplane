@@ -52,8 +52,8 @@ void resetPassengers(passenger *passengers, int numPassengers)
         passengers[i].currPos.y = 0;
         passengers[i].currState = LookingForRow;
         passengers[i].ticksToWait = 0;
-        if(passengers[i].hasLuggage == 2)
-            passengers[i].hasLuggage = 1;
+        if(passengers[i].hasLuggage == STOWED_AWAY_LUGGAGE)
+            passengers[i].hasLuggage = HAS_LUGGAGE;
     }
 }
 

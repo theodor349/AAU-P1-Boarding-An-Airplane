@@ -3,11 +3,11 @@
 #define LUGGAGE_STORE_TICKS 3
 
 void stateLuggage(passenger *pArr, int i) {
-    if(pArr[i].hasLuggage == 2 || pArr[i].hasLuggage == 0) {
+    if(pArr[i].hasLuggage == STOWED_AWAY_LUGGAGE || pArr[i].hasLuggage == NO_LUGGAGE) {
         pArr[i].currState = Seating;
         return;
     }
 
-    pArr[i].hasLuggage = 2;
+    pArr[i].hasLuggage = STOWED_AWAY_LUGGAGE;
     pArr[i].ticksToWait = LUGGAGE_STORE_TICKS;
 }
