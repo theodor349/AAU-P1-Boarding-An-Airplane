@@ -11,9 +11,7 @@
 float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
-    /*
-    * RUN THROUGH ALL PASSENGERS AND RESET ALL VARIABLES AND CAHNGE LETTERNUMBER TO BE FROM -3 to 3 INSTEAD OF 0 to 6
-    */
+    convertSeatLetters(pArr, pArrSize);
 
     //Keep ticking until all passengers are seated
     while(seatedPassengers < pArrSize) {
@@ -43,6 +41,22 @@ float runSimulation(passenger *pArr, int pArrSize) {
     }
 
     return tick * TIMESTEP_IN_SECONDS;
+}
+
+void convertSeatLetters(passenger *pArr, int pArrSize) {
+    for(int i = 0; i < pArrSize; i++) {
+        switch(pArr[i].seatPos.y) {
+            case D:
+               pArr[i].seatPos.y = -1;
+               break;
+            case E:
+                pArr[i].seatPos.y = -2;
+                break;
+            case F:
+                pArr[i].seatPos.y = -3;
+                break;
+        }
+    }
 }
 
 void updatePassenger(passenger *pArr, int pArrSize, int i) {
