@@ -3,7 +3,7 @@
 #define MAX_SEATS 189
 #define LENGTH 10
 
-// Returns a passenger array 
+// Returns a passenger array
 passenger* gather(FILE *passengerSource) {
     passenger *passengerArray;
     int passengerAmount = 0;
@@ -44,11 +44,13 @@ void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmo
 
     if (passengerSource != NULL) {
         for (i = 0; i < passengerAmount; i++) {
-            // Format one line of the file 
+            // Format one line of the file
             fscanf(passengerSource, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &passengerArray[i].hasLuggage);
 
             // Initialize passengers with zero values
             passengerArray[i].currPos.x = -1 - i;
+            if(passengerArray[i].currPos.x > 13)
+                passengerArray[i].currPos.x--;
             passengerArray[i].currPos.y = 0;
             passengerArray[i].currState = LookingForRow;
             passengerArray[i].ticksToWait = 0;
