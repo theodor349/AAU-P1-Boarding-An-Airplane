@@ -1,5 +1,4 @@
 #include "Header.h"
-
 #define BOARDINGALGORITHMS 2
 
 int main (void){

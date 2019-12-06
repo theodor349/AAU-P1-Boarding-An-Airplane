@@ -8,10 +8,12 @@
 #define MAX_SEATS 189
 #define TIMESTEP_IN_SECONDS 1
 
+void resetPassengers(passenger *passengers, int numPassengers);
+
 float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
-    convertSeatLetters(pArr, pArrSize);
+    resetPassengers(pArr, pArrSize);
 
     //Keep ticking until all passengers are seated
     while(seatedPassengers < pArrSize) {
@@ -29,12 +31,10 @@ float runSimulation(passenger *pArr, int pArrSize) {
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
 
-            /*
-            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
-            pArr[i].currPos.x, pArr[i].currPos.y, 
-            pArr[i].seatPos.x, pArr[i].seatPos.y,
-            (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
-            */            
+//            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
+//            pArr[i].currPos.x, pArr[i].currPos.y,
+//            pArr[i].seatPos.x, pArr[i].seatPos.y,
+//            (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
         }
 
         tick++;
@@ -43,12 +43,24 @@ float runSimulation(passenger *pArr, int pArrSize) {
     return tick * TIMESTEP_IN_SECONDS;
 }
 
+void resetPassengers(passenger *passengers, int numPassengers)
+{
+    convertSeatLetters(passengers, numPassengers);
+    for (int i = 0; i < numPassengers; ++i)
+    {
+        passengers[i].currPos.x = -1 - i;
+        passengers[i].currPos.y = 0;
+        passengers[i].currState = LookingForRow;
+        passengers[i].ticksToWait = 0;
+    }
+}
+
 void convertSeatLetters(passenger *pArr, int pArrSize) {
     for(int i = 0; i < pArrSize; i++) {
         switch(pArr[i].seatPos.y) {
             case D:
-               pArr[i].seatPos.y = -1;
-               break;
+                pArr[i].seatPos.y = -1;
+                break;
             case E:
                 pArr[i].seatPos.y = -2;
                 break;
