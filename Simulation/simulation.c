@@ -13,6 +13,7 @@ void resetPassengers(passenger *passengers, int numPassengers);
 float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
+    // Make sure all passenger data is as expected 
     resetPassengers(pArr, pArrSize);
 
     //Keep ticking until all passengers are seated
@@ -23,11 +24,13 @@ float runSimulation(passenger *pArr, int pArrSize) {
             if(pArr[i].currState == Idle)
                 continue;
 
+            // Decrement time 
             if(pArr[i].ticksToWait > 0)
                 pArr[i].ticksToWait--;
             else
                 updatePassenger(pArr, pArrSize, i);
 
+            // If the passenger has entered the Idle state increment seated passengers by 1
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
 
