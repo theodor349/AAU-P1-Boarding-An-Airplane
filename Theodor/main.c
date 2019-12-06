@@ -11,15 +11,16 @@ int main (void){
     int pAmount = getPassengerAmount(passengerSource);
 
     for (int i = 0; i < BOARDINGALGORITHMS; i++ ){
-
+        printf("\nNew Boarding Procedure: %d\n", i);
         QueuePassengers(pArray, pAmount, (boardingProcedure) i);
         boardingCalculations[i].time = runSimulation(pArray, pAmount);
         boardingCalculations[i].procedure = i;
+        printf("Boarding procedure: %d finished in %d seconds\n", i, boardingCalculations[i].time);
     }
 
     qsort(boardingCalculations, BOARDINGALGORITHMS, sizeof(int), (compfn)timeCmp);
 
-    printf("Boarding times in ascending order: \n");
+    printf("\nBoarding times in ascending order: \n");
 
     for(int i = 0; i < BOARDINGALGORITHMS; i++){
 
