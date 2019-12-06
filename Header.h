@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
-#define NO_LUGGAGE 0
-#define HAS_LUGGAGE 1
-#define STOWED_AWAY_LUGGAGE 2
+#include <stdbool.h>
 
 typedef
 struct point {
@@ -32,7 +29,7 @@ struct passenger {
     point seatPos;
     state currState;
     int ticksToWait;
-    int hasLuggage;
+    bool hasLuggage;
 } passenger;
 
 typedef

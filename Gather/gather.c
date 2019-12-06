@@ -37,21 +37,22 @@ int getPassengerAmount(FILE *passengerSource) {
 
 // Reads a file and inputs all information about passengers into a passenger array
 void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmount) {
-    char tempChar = 0;
-    int i = 0;
 
     rewind(passengerSource);
 
     if (passengerSource != NULL) {
-        for (i = 0; i < passengerAmount; i++) {
+        for (int i = 0; i < passengerAmount; i++) {
+            char tempChar;
+            int tempBool;
             // Format one line of the file 
-            fscanf(passengerSource, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &passengerArray[i].hasLuggage);
+            fscanf(passengerSource, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &tempBool);
 
             // Initialize passengers with zero values
             passengerArray[i].currPos.x = -1 - i;
             passengerArray[i].currPos.y = 0;
             passengerArray[i].currState = LookingForRow;
             passengerArray[i].ticksToWait = 0;
+            passengerArray[i].hasLuggage = tempBool;
 
             // Set Seat letter
             switch (tempChar) {

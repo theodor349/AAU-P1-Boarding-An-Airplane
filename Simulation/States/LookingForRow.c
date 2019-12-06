@@ -19,7 +19,7 @@ void stateLookingForRow(passenger *pArr, int i) {
         // Move forward
         pArr[i].currPos.x += STEP_DISTANCE;
     } else {
-        // Is the distance between two passengers is >= 2 Steps
+        // Is the distance between the two passengers is >= 2 Steps
         if(pArr[infront].currPos.x - pArr[i].currPos.x >= STEP_DISTANCE * 2) {
             // Move forward
             pArr[i].currPos.x += STEP_DISTANCE;
@@ -27,13 +27,12 @@ void stateLookingForRow(passenger *pArr, int i) {
     }
 }
 
-
 //Returns the index of the passenger ahead of the passenger with index pIndex.
 //Returns -1 if no passenger is ahead.
 int getPassengerAhead(passenger *pArr, int pIndex) {
     // For each passenger infront 
     for(int i = pIndex - 1; i >= 0; --i) {
-        // Is passenger Idle/Seated?
+        // If not idle/sitting, return the index?
         if(pArr[i].currState != Idle)
             return i;
     }
