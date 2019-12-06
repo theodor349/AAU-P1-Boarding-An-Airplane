@@ -40,6 +40,11 @@ void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmo
         for (i = 0; i < passengerAmount; i++) {
             fscanf(passengerSource, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &passengerArray[i].hasLuggage);
 
+            passengerArray[i].currPos.x = -1 - i;
+            passengerArray[i].currPos.y = 0;
+            passengerArray[i].currState = LookingForRow;
+            passengerArray[i].ticksToWait = 0;
+
             switch (tempChar) {
                 case 'A':
                     passengerArray[i].seatPos.y = A;
