@@ -19,6 +19,7 @@ passenger* gather(FILE *passengerSource) {
 
 int getPassengerAmount(FILE *passengerSource) {
     int ch, passengerAmount = 0;
+    rewind(passengerSource);
 
     if (passengerSource != NULL) {
         while ((ch = fgetc(passengerSource)) != EOF) {
