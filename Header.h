@@ -48,6 +48,7 @@ typedef int (*compfn)(const void*, const void*);
 
 // Simulation
 float runSimulation(passenger *pArr, int pArrSize);
+void convertSeatLetters(passenger *pArr, int pArrSize);
 void updatePassenger(passenger *pArr, int pArrSize, int i);
 void stateLookingForRow(passenger *pArr, int i);
 void stateLuggage(passenger *pArr, int i);
