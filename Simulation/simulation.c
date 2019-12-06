@@ -46,13 +46,13 @@ float runSimulation(passenger *pArr, int pArrSize) {
 void convertSeatLetters(passenger *pArr, int pArrSize) {
     for(int i = 0; i < pArrSize; i++) {
         switch(pArr[i].seatPos.y) {
-            case 4:
+            case D:
                pArr[i].seatPos.y = -1;
                break;
-            case 5:
+            case E:
                 pArr[i].seatPos.y = -2;
                 break;
-            case 6:
+            case F:
                 pArr[i].seatPos.y = -3;
                 break;
         }
