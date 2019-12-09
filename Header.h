@@ -50,7 +50,7 @@ enum seatLetter{
 
 typedef int (*compfn)(const void*, const void*);
 
-/* Simulation */
+// Simulation
 float runSimulation(passenger *pArr, int pArrSize);
 void convertSeatLetters(passenger *pArr, int pArrSize);
 void updatePassenger(passenger *pArr, int pArrSize, int i);
@@ -58,21 +58,21 @@ void stateLookingForRow(passenger *pArr, int i);
 void stateLuggage(passenger *pArr, int i);
 void stateSeating(passenger *pArr, int pArrSize, int i);
 
-/* Looking For Row */
+//Looking For Row
 int getPassengerAhead(passenger *pArr, int pIndex);
 
-/* Seating */
+//Seating
 int countPassengersInRow(passenger *pArr, int pArrSize, int pI);
 int getClosestToAisle(passenger *pArr, int pArrSize, int pI);
 
-/* BoardingProcedure */
+// BoardingProcedure
 char GetSeatName(seatLetter letter);
 void QueuePassengers(passenger* passengers, int numPassengers, enum boardingProcedure procedure);
-/* Dummy */
+// Dummy
 void generatePassengers(passenger passengers[3]);
 void printPassenger(passenger passengers[3]);
 
-/* Gather */
+//gather
 int getPassengerAmount(FILE *passengerSource);
 passenger* gather(FILE *passengerSource);
 void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmount);
