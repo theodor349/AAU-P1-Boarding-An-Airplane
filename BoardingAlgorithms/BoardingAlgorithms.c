@@ -8,6 +8,7 @@ int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numP
 int passengerCompare(passenger* a, passenger* b);
 int getRandomSpot(int *takenSpots, int numPassengers);
 void CopyArray(passenger *to, passenger *from, int num);
+void convertSeatLettersBack(passenger *passengers, int numPassengers);
 
 void testFunction()
 {
