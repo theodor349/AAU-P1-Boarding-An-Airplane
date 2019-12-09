@@ -5,7 +5,7 @@
 
 void stateLookingForRow(passenger *pArr, int i) {
     // Is the passenger is at the correct row?
-    if(pArr[i].currPos.x == pArr[i].seatPos.x) {
+    if(pArr[i].currPos.x == (pArr[i].seatPos.x * 2) - 1) {
         // Move on to next state
         pArr[i].currState = pArr[i].hasLuggage ? Luggage : Seating;
         return;
