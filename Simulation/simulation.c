@@ -16,7 +16,7 @@ float runSimulation(passenger *pArr, int pArrSize) {
     // Make sure all passenger data is as expected 
     resetPassengers(pArr, pArrSize);
 
-    //Keep ticking until all passengers are seated
+    // Keep ticking until all passengers are seated
     while(seatedPassengers < pArrSize) {
 
         for(int i = 0; i < pArrSize; ++i) {
@@ -24,7 +24,7 @@ float runSimulation(passenger *pArr, int pArrSize) {
             if(pArr[i].currState == Idle)
                 continue;
 
-            // Decrement time 
+            // Decrement ticks to wait or update the passenger
             if(pArr[i].ticksToWait > 0)
                 pArr[i].ticksToWait--;
             else
@@ -33,11 +33,6 @@ float runSimulation(passenger *pArr, int pArrSize) {
             // If the passenger has entered the Idle state increment seated passengers by 1
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
-
-//            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
-//            pArr[i].currPos.x, pArr[i].currPos.y,
-//            pArr[i].seatPos.x, pArr[i].seatPos.y,
-//            (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
         }
 
         tick++;
@@ -46,11 +41,9 @@ float runSimulation(passenger *pArr, int pArrSize) {
     return tick * TIMESTEP_IN_SECONDS;
 }
 
-void resetPassengers(passenger *passengers, int numPassengers)
-{
+void resetPassengers(passenger *passengers, int numPassengers) {
     convertSeatLetters(passengers, numPassengers);
-    for (int i = 0; i < numPassengers; ++i)
-    {
+    for (int i = 0; i < numPassengers; ++i) {
         passengers[i].currPos.x = -1 - i;
         passengers[i].currPos.y = 0;
         passengers[i].currState = LookingForRow;
