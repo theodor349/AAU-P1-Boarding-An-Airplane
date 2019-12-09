@@ -27,6 +27,9 @@ void testFunction()
 // CALLED FROM MAIN FUNCTION
 void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure)
 {
+	// Convert seatletters from simulation to boarding stadard
+    convertSeatLettersBack(passengers, numPassengers);
+
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
     // Copy all passengers to a new array
     CopyArray(passengersCopy, passengers, numPassengers);
@@ -45,6 +48,25 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
     }
 
     free(passengersCopy);
+}
+
+void convertSeatLettersBack(passenger *passengers, int numPassengers)
+{
+    for (int i = 0; i < numPassengers; ++i)
+    {
+        int d = passengers[i].seatPos.y;
+        switch(passengers[i].seatPos.y) {
+            case -1:
+                passengers[i].seatPos.y = D;
+                break;
+            case -2:
+                passengers[i].seatPos.y = E;
+                break;
+            case -3:
+                passengers[i].seatPos.y = F;
+                break;
+        }
+    }
 }
 
 // Copies an array over to a new array
