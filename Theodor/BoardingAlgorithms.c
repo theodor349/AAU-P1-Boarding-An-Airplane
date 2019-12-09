@@ -127,22 +127,26 @@ void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPass
 int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers)
 {
     int left = 0, right = numPassengers, middle;
+    int py, sy = seat < 4 ? seat + 6 : seat;
+    passenger p;
+
     while (left < right){
         // Get middle
         middle = (left + right) * 0.5;
-        passenger p = sortedPassengers[middle];
+        p = sortedPassengers[middle];
 
-        // If passenger row is less than Row
-        if (p.seatPos.x < row)
+        // If passenger row is greater than seeked Row
+        if (p.seatPos.x > row)
             right = middle;
             // If passenger row is correct
         else if (p.seatPos.x == row)
         {
-            // If passenger seat is less than seat
-            if (p.seatPos.y < seat)
+            py = p.seatPos.y < 4 ? p.seatPos.y + 6 : p.seatPos.y;
+            // If passenger seat is greater than seeked seat
+            if (py > sy)
                 left = middle + 1;
                 // If the right seat and row have been found
-            else if (p.seatPos.y == seat)
+            else if (py == sy)
                 return middle;
             else
                 right = middle;
@@ -172,25 +176,25 @@ int getRandomSpot(int *takenSpots, int numPassengers)
 int passengerCompare(passenger* a, passenger* b)
 {
     // Row
-    int r = a->seatPos.x - b->seatPos.y;
+    int r = a->seatPos.x - b->seatPos.x;
     if(r != 0)
         return r;
 
     // Place in row A (A B C, F E D)
     int ay = a->seatPos.y < 4 ? a->seatPos.y + 6 : a->seatPos.y;
     int by = b->seatPos.y < 4 ? b->seatPos.y + 6 : b->seatPos.y;
-    return  ay - by;
+    return by - ay;
 }
 
 /*
  * Dummy stuff :D
  */
 
-void printPassenger(passenger passengers[3])
+void printPassenger(passenger passengers[189])
 {
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 189; ++i)
     {
-        printf("%d row: %d, seat %c\n", i, passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
+        printf("%3d row: %2d, seat %c\n", i, passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
     }
 }
 

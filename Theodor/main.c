@@ -17,7 +17,6 @@ int main (void){
         // Calculate Boarding Time
         boardingCalculations[i].time = runSimulation(pArray, pAmount);
         boardingCalculations[i].procedure = i;
-        printf("\n");
     }
 
     // Sort the Boarding Times
