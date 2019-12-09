@@ -33,12 +33,11 @@ float runSimulation(passenger *pArr, int pArrSize) {
             // If the passenger has entered the Idle state increment seated passengers by 1
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
-            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
-                   pArr[i].currPos.x, pArr[i].currPos.y,
-                   (pArr[i].seatPos.x * 2) - 1, pArr[i].seatPos.y,
-                   (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
+//            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
+//                   pArr[i].currPos.x, pArr[i].currPos.y,
+//                   (pArr[i].seatPos.x * 2) - 1, pArr[i].seatPos.y,
+//                   (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
         }
-        printf("\n");
         tick++;
     }
 

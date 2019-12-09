@@ -11,7 +11,7 @@ void stateSeating(passenger *pArr, int pArrSize, int i) {
 	// Get number of passengers blocking the way to the seat
 	int O = countPassengersInRow(pArr, pArrSize, i);
 	if(O > 0) {
-		// Get amount of seated passengers on this row
+        // Get seat position of closes passenger
 		int Sp = abs(pArr[getClosestToAisle(pArr, pArrSize, i)].seatPos.y);
 		// Set time to wait
 		pArr[i].ticksToWait = 2*(O + Sp) - (Sp - 1);
