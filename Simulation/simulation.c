@@ -41,11 +41,9 @@ float runSimulation(passenger *pArr, int pArrSize) {
     return tick * TIMESTEP_IN_SECONDS;
 }
 
-void resetPassengers(passenger *passengers, int numPassengers)
-{
+void resetPassengers(passenger *passengers, int numPassengers) {
     convertSeatLetters(passengers, numPassengers);
-    for (int i = 0; i < numPassengers; ++i)
-    {
+    for (int i = 0; i < numPassengers; ++i) {
         passengers[i].currPos.x = -1 - i;
         passengers[i].currPos.y = 0;
         passengers[i].currState = LookingForRow;
