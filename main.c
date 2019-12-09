@@ -2,27 +2,27 @@
 #define BOARDINGALGORITHMS 2
 
 int main (void){
-    // Boarding procedure Times    
+    /* Boarding procedure Times */
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
 
-    // Initial setup
+    /* Initial setup */
     FILE *passengerSource = fopen("passengerText.txt", "r");
     passenger *pArray = gather(passengerSource);
     int pAmount = getPassengerAmount(passengerSource);
 
-    // For each Boarding procedure 
+    /* For each Boarding procedure */ 
     for (int i = 0; i < BOARDINGALGORITHMS; i++ ){
-        // Shuffle Passengers
+        /* Shuffle Passengers */
         QueuePassengers(pArray, pAmount, (boardingProcedure) i);
-        // Calculate Boarding Time
+        /* Calculate Boarding Time */
         boardingCalculations[i].time = runSimulation(pArray, pAmount);
         boardingCalculations[i].procedure = i;
     }
 
-    // Sort the Boarding Times
+    /* Sort the Boarding Times */
     qsort(boardingCalculations, BOARDINGALGORITHMS, sizeof(boardingCalculation), (compfn)timeCmp);
 
-    // Print the results
+    /* Print the results */
     for(int i = 0; i < BOARDINGALGORITHMS; i++)
     {
         switch(boardingCalculations[i].procedure)
