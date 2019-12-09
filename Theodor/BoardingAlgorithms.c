@@ -8,7 +8,6 @@ int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numP
 int passengerCompare(passenger* a, passenger* b);
 int getRandomSpot(int *takenSpots, int numPassengers);
 void CopyArray(passenger *to, passenger *from, int num);
-
 void convertSeatLettersBack(passenger *passengers, int numPassengers);
 
 void testFunction()
@@ -29,7 +28,9 @@ void testFunction()
 // CALLED FROM MAIN FUNCTION
 void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure)
 {
+    // Convert seatletters from simulation to boarding stadard
     convertSeatLettersBack(passengers, numPassengers);
+
     passenger* passengersCopy = calloc(numPassengers, sizeof(passengers[0]));
     // Copy all passengers to a new array
     CopyArray(passengersCopy, passengers, numPassengers);
@@ -54,7 +55,6 @@ void convertSeatLettersBack(passenger *passengers, int numPassengers)
 {
     for (int i = 0; i < numPassengers; ++i)
     {
-        int d = passengers[i].seatPos.y;
         switch(passengers[i].seatPos.y) {
             case -1:
                 passengers[i].seatPos.y = D;
@@ -66,9 +66,7 @@ void convertSeatLettersBack(passenger *passengers, int numPassengers)
                 passengers[i].seatPos.y = F;
                 break;
         }
-        printf("%d -> %d\n", d, passengers[i].seatPos.y);
     }
-    printf("\n");
 }
 
 // Copies an array over to a new array
@@ -92,7 +90,7 @@ void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassen
         int spot = getRandomSpot(takeSpots, numPassengers);
         // Assign the passenger
         passengers[spot] = sortedPassengers[i];
-        // Increment taken spots
+        /* Increment taken spots */
         takeSpots[spot] = 1;
     }
 }
