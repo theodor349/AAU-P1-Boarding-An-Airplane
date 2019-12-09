@@ -55,7 +55,6 @@ void convertSeatLettersBack(passenger *passengers, int numPassengers)
 {
     for (int i = 0; i < numPassengers; ++i)
     {
-        int d = passengers[i].seatPos.y;
         switch(passengers[i].seatPos.y) {
             case -1:
                 passengers[i].seatPos.y = D;
