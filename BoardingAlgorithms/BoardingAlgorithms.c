@@ -69,7 +69,7 @@ void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassen
         /* Assign the passenger */
         passengers[spot] = sortedPassengers[i];
         /* Increment taken spots */
-        takeSpots[i] = 1;
+        takeSpots[spot] = 1;
     }
 }
 

@@ -58,7 +58,9 @@ void resetPassengers(passenger *passengers, int numPassengers)
 }
 
 void convertSeatLetters(passenger *pArr, int pArrSize) {
+    printf("Simulation\n");
     for(int i = 0; i < pArrSize; i++) {
+        int d = pArr[i].seatPos.y;
         switch(pArr[i].seatPos.y) {
             case D:
                 pArr[i].seatPos.y = -1;
@@ -70,7 +72,9 @@ void convertSeatLetters(passenger *pArr, int pArrSize) {
                 pArr[i].seatPos.y = -3;
                 break;
         }
+        printf("%d -> %d\n", d, pArr[i].seatPos.y);
     }
+    printf("\n");
 }
 
 void updatePassenger(passenger *pArr, int pArrSize, int i) {
