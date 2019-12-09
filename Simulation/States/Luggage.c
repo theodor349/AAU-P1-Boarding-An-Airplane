@@ -1,6 +1,6 @@
 #include "..\..\Header.h"
 
-#define LUGGAGE_STORE_TICKS 3
+#define LUGGAGE_STORE_TICKS 30
 
 void stateLuggage(passenger *pArr, int i) {
 	// If the passengers has no luggage or has stowed it away
