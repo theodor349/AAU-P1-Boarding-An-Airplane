@@ -1,5 +1,4 @@
 #include "..\Header.h"
-
 #define BOARDINGALGORITHMS 2
 
 int main (void){
@@ -12,12 +11,13 @@ int main (void){
     int pAmount = getPassengerAmount(passengerSource);
 
     // For each Boarding procedure
-    for (int i = 0; i < BOARDINGALGORITHMS; i++ ){
-        // Shuffle Passengers
+    for (int i = 0; i < BOARDINGALGORITHMS; i++) {
+        // Order Passengers
         QueuePassengers(pArray, pAmount, (boardingProcedure) i);
         // Calculate Boarding Time
         boardingCalculations[i].time = runSimulation(pArray, pAmount);
         boardingCalculations[i].procedure = i;
+        printf("\n");
     }
 
     // Sort the Boarding Times

@@ -6,16 +6,17 @@
 #define SIT_TIME 0
 #define MAX_ROWS 33
 #define MAX_SEATS 189
-#define TIMESTEP_IN_SECONDS 1
+#define TIMESTEP_IN_SECONDS 0.45
 
 void resetPassengers(passenger *passengers, int numPassengers);
 
 float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
+    // Make sure all passenger data is as expected
     resetPassengers(pArr, pArrSize);
 
-    //Keep ticking until all passengers are seated
+    // Keep ticking until all passengers are seated
     while(seatedPassengers < pArrSize) {
 
         for(int i = 0; i < pArrSize; ++i) {
@@ -23,31 +24,30 @@ float runSimulation(passenger *pArr, int pArrSize) {
             if(pArr[i].currState == Idle)
                 continue;
 
+            // Decrement ticks to wait or update the passenger
             if(pArr[i].ticksToWait > 0)
                 pArr[i].ticksToWait--;
             else
                 updatePassenger(pArr, pArrSize, i);
 
+            // If the passenger has entered the Idle state increment seated passengers by 1
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
-
-//            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
-//            pArr[i].currPos.x, pArr[i].currPos.y,
-//            pArr[i].seatPos.x, pArr[i].seatPos.y,
-//            (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
+            printf("i: %d, pos(%2d,%2d), seatPos(%2d,%2d), state: %d, wait: %d, luggage: %d\n", i,
+                   pArr[i].currPos.x, pArr[i].currPos.y,
+                   (pArr[i].seatPos.x * 2) - 1, pArr[i].seatPos.y,
+                   (int)pArr[i].currState, pArr[i].ticksToWait, pArr[i].hasLuggage);
         }
-
+        printf("\n");
         tick++;
     }
 
     return tick * TIMESTEP_IN_SECONDS;
 }
 
-void resetPassengers(passenger *passengers, int numPassengers)
-{
+void resetPassengers(passenger *passengers, int numPassengers) {
     convertSeatLetters(passengers, numPassengers);
-    for (int i = 0; i < numPassengers; ++i)
-    {
+    for (int i = 0; i < numPassengers; ++i) {
         passengers[i].currPos.x = -1 - i;
         passengers[i].currPos.y = 0;
         passengers[i].currState = LookingForRow;
@@ -58,9 +58,7 @@ void resetPassengers(passenger *passengers, int numPassengers)
 }
 
 void convertSeatLetters(passenger *pArr, int pArrSize) {
-    printf("Simulation\n");
     for(int i = 0; i < pArrSize; i++) {
-        int d = pArr[i].seatPos.y;
         switch(pArr[i].seatPos.y) {
             case D:
                 pArr[i].seatPos.y = -1;
@@ -72,9 +70,7 @@ void convertSeatLetters(passenger *pArr, int pArrSize) {
                 pArr[i].seatPos.y = -3;
                 break;
         }
-        printf("%d -> %d\n", d, pArr[i].seatPos.y);
     }
-    printf("\n");
 }
 
 void updatePassenger(passenger *pArr, int pArrSize, int i) {
