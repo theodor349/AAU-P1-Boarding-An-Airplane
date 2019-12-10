@@ -28,8 +28,8 @@ void stateLookingForRow(passenger *pArr, int i) {
 }
 
 
-// Returns the index of the passenger ahead of the passenger with index pIndex.
-// Returns -1 if no passenger is ahead.
+/* Returns the index of the passenger ahead of the passenger with index pIndex.
+   Returns -1 if no passenger is ahead. */
 int getPassengerAhead(passenger *pArr, int pIndex) {
     // For each passenger infront 
     for(int i = pIndex - 1; i >= 0; --i) {
