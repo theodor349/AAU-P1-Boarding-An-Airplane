@@ -14,6 +14,7 @@ int main (void){
     for (int i = 0; i < BOARDINGALGORITHMS; i++) {
         // Order Passengers
         QueuePassengers(pArray, pAmount, (boardingProcedure) i);
+
         // Calculate Boarding Time
         boardingCalculations[i].time = runSimulation(pArray, pAmount);
         boardingCalculations[i].procedure = i;

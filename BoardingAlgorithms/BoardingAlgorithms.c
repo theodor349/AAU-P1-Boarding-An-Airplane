@@ -2,13 +2,16 @@
 #define ROWS 33
 
 void testFunction();
-void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers);
+void randomQue(passenger *passengers, int numPassengers);
 void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers);
 int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers);
 int passengerCompare(passenger* a, passenger* b);
 int getRandomSpot(int *takenSpots, int numPassengers);
 void CopyArray(passenger *to, passenger *from, int num);
 void convertSeatLettersBack(passenger *passengers, int numPassengers);
+void knuthShuffle(passenger *passengers, int start, int end);
+int randIndex(int i, int end);
+void swap(passenger *passengers, int iA, int iB);
 
 void testFunction()
 {
@@ -28,6 +31,8 @@ void testFunction()
 // CALLED FROM MAIN FUNCTION
 void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure)
 {
+    srand(time(NULL)); 
+
     // Convert seatletters from simulation to boarding stadard
     convertSeatLettersBack(passengers, numPassengers);
 
@@ -41,9 +46,10 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
     switch (procedure)
     {
         case Random:
-            randomQue(passengers, passengersCopy, numPassengers);
+            randomQue(passengers, numPassengers);
             break;
         case SteffenModified:
+            
             steffenQue(passengers, passengersCopy, numPassengers);
             break;
     }
@@ -79,20 +85,24 @@ void CopyArray(passenger *to, passenger *from, int num)
 }
 
 // Shuffles the passengers randomly
-void randomQue(passenger *passengers, passenger *sortedPassengers, int numPassengers)
-{
-    int* takeSpots = calloc(numPassengers, sizeof(int));
+void randomQue(passenger *passengers, int numPassengers) {
+    knuthShuffle(passengers, 0, numPassengers);
+}
 
-    // For each passenger
-    for (int i = 0; i < numPassengers; ++i)
-    {
-        // Get a random seat
-        int spot = getRandomSpot(takeSpots, numPassengers);
-        // Assign the passenger
-        passengers[spot] = sortedPassengers[i];
-        /* Increment taken spots */
-        takeSpots[spot] = 1;
+void knuthShuffle(passenger *passengers, int start, int end) {
+    for (int i = start; i < end; i++) {
+        swap(passengers, randIndex(i, end), i);
     }
+}
+
+int randIndex(int i, int end) {
+    return (rand() % (end - i)) + i;
+}
+
+void swap(passenger *passengers, int iA, int iB) {
+    passenger temp = passengers[iA];
+    passengers[iA] = passengers[iB];
+    passengers[iB] = temp;
 }
 
 void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers)

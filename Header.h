@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 #define NO_LUGGAGE 0
 #define HAS_LUGGAGE 1
