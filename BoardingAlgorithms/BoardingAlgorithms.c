@@ -49,7 +49,6 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
             randomQue(passengers, numPassengers);
             break;
         case SteffenModified:
-            
             steffenQue(passengers, passengersCopy, numPassengers);
             break;
     }
