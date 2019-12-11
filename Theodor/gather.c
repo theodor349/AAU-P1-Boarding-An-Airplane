@@ -49,7 +49,7 @@ void readFile(passenger *passengerArray, FILE *passengerSource, int passengerAmo
             fscanf(passengerSource, " %d %c %d", &passengerArray[i].seatPos.x, &tempChar, &passengerArray[i].hasLuggage);
 
             // Initialize passengers with zero values
-            passengerArray[i].currPos.x = -1 - i;
+            passengerArray[i].currPos.x = -3 - i;
             if(passengerArray[i].seatPos.x > 13)
                 passengerArray[i].seatPos.x--;
             passengerArray[i].currPos.y = 0;

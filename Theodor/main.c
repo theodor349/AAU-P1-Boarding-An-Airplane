@@ -9,7 +9,7 @@ void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalcula
 FILE *GetFilePointer(int index);
 int getLuggageAmount(FILE *passengerSource);
 
-void writeTestResults(int boardingTimes[101][BOARDINGALGORITHMS][2]);
+void writeTestResults(int boardingTimes[][BOARDINGALGORITHMS][2]);
 
 int main (void){
     int result;
@@ -42,6 +42,7 @@ int RunTests()
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
     int index = 0, numPassengers, numLuggage, position;
     int tBoardingTimes[101][BOARDINGALGORITHMS][2];
+    // Reset Array
     for (int position = 0; position < 101; ++position)
     {
         for (int i = 0; i < BOARDINGALGORITHMS; ++i)
@@ -73,15 +74,54 @@ int RunTests()
         passengerSource = GetFilePointer(index);
     }
 
-    writeTestResults(tBoardingTimes);
+    /*
+     * MAKE OUTPUT
+     */
+
+    if(chdir("\Results") != 0)
+        printf("Something Went Bad with the directories \n");
+    FILE *outputFile = fopen("Results.csv", "w");
+
+    for (int i = 0; i < BOARDINGALGORITHMS; ++i)
+    {
+        fprintf(outputFile, "\n")
+        switch(i)
+        {
+            case Random:
+                fprintf(outputFile, "%s", "Random\n");
+                break;
+            case SteffenModified:
+                fprintf(outputFile, "%s", "Steffen Modified\n");
+                break;
+            case BackToFront:
+                fprintf(outputFile, "%s", "Back to Front\n");
+                break;
+            default:
+                fprintf(outputFile, "%s", "Error\n");
+                break;
+        }
+        for (int position = 0; position < 101; ++position)
+        {
+            if(tBoardingTimes[position][i][1] > 0)
+            {
+                int time = tBoardingTimes[position][i][0] / tBoardingTimes[position][i][1];
+                if(position == 100)
+                    fprintf(outputFile, "%d, ", 1);
+                else
+                    fprintf(outputFile, "0.%d, ", position);
+                fprintf(outputFile, "%d\n", time);
+            }
+        }
+    }
+    fclose(outputFile);
 
     printf("Read %d files\n", index);
     return EXIT_SUCCESS;
 }
 
-void writeTestResults(int boardingTimes[101][BOARDINGALGORITHMS][2])
+void writeTestResults(int boardingTimes[][BOARDINGALGORITHMS][2])
 {
-    
+
 }
 
 int getLuggageAmount(FILE *passengerSource)
