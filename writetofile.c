@@ -15,9 +15,9 @@ int main(void) {
         exit(0);
     }
 
-    printf("Number of passengers to create whith given luggage %:\n");
+    printf("Number of passengers to create with given luggage %:\n");
     scanf(" %d %d", &passengerAmount, &luggagePercent);
-    luggagePercent %= 100;
+    luggagePercent %= 100 + 1;
 
     for (i = 1; i < passengerAmount + 1; i++) {
         determineChance = rand() % 100 + 1;

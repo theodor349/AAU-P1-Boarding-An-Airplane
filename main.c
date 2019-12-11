@@ -151,7 +151,7 @@ int RunProgram()
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
 
     // Initial setup
-    FILE *passengerSource = fopen("passengerText.txt", "r");
+    FILE *passengerSource = fopen("passengertext.txt", "r");
     GetBoardingTimes(passengerSource, boardingCalculations);
 
     // Sort the Boarding Times
@@ -171,7 +171,7 @@ int RunProgram()
             case BackToFront:
                 printf("%-30s | ", "Back-to-front boarding time");
                 break;
-            case Raw: 
+            case Raw:
                 printf("%-30s | ", "Raw boarding time");
                 break;
             default:
