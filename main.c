@@ -1,7 +1,7 @@
 #include "Header.h"
 #include <unistd.h>
 
-#define BOARDINGALGORITHMS 3
+#define BOARDINGALGORITHMS 4
 
 int RunProgram();
 int RunTests();
@@ -14,13 +14,9 @@ void writeTestResults(int boardingTimes[][BOARDINGALGORITHMS][2]);
 int main (void){
     int result;
     int input = 1;
-    if(1 == 0)
-    {
-        printf("0 = Tests, 1 = Program\n");
-        scanf(" %d", &input);
-    }
-    else
-        input = 0;
+
+    printf("0 = Tests, 1 = Program\n");
+    scanf(" %d", &input);
 
     if(input > 0)
         result = RunProgram();
@@ -33,8 +29,6 @@ int main (void){
 int RunTests()
 {
     // Navigate to Test dir
-    chdir("..");
-    chdir("..");
     if(chdir("\TestData") != 0)
         printf("Something Went Bad with the directories \n");
 
@@ -84,7 +78,7 @@ int RunTests()
 
     for (int i = 0; i < BOARDINGALGORITHMS; ++i)
     {
-        fprintf(outputFile, "\n")
+        fprintf(outputFile, "\n");
         switch(i)
         {
             case Random:
@@ -95,6 +89,9 @@ int RunTests()
                 break;
             case BackToFront:
                 fprintf(outputFile, "%s", "Back to Front\n");
+                break;
+            case Raw:
+            	fprintf(outputFile, "%s", "Raw\n");
                 break;
             default:
                 fprintf(outputFile, "%s", "Error\n");
@@ -174,6 +171,9 @@ int RunProgram()
             case BackToFront:
                 printf("%-30s | ", "Back-to-front boarding time");
                 break;
+            case Raw: 
+                printf("%-30s | ", "Raw boarding time");
+                break;
             default:
                 printf("error parsing boarding procedure: ");
                 break;
@@ -189,7 +189,6 @@ int RunProgram()
 
 void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalculations[BOARDINGALGORITHMS])
 {
-
     passenger *pArray = gather(passengerSource);
     int pAmount = getPassengerAmount(passengerSource);
 

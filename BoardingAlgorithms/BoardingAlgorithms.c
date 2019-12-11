@@ -43,6 +43,8 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
 
     // Call the correct procedure
     switch (procedure) {
+        case Raw:
+            break;
         case Random:
             randomQue(passengers, numPassengers);
             break;
