@@ -32,10 +32,10 @@ int main (void){
                 printf("%-30s | ", "Random boarding time");
                 break;
             case SteffenModified:
-                printf("%-30s | ", "Steffen modified boarding time");
+                printf("%-30s | ", "Steffen method boarding time");
                 break;
             case BackToFront:
-                printf("%-30s | ", "Back-to-front modified boarding time");
+                printf("%-30s | ", "Back-to-front boarding time");
                 break;
             default:
                 printf("error parsing boarding procedure: ");
