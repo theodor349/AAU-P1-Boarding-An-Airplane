@@ -84,7 +84,7 @@ int RunTests()
 
     for (int i = 0; i < BOARDINGALGORITHMS; ++i)
     {
-        fprintf(outputFile, "\n")
+        fprintf(outputFile, "\n");
         switch(i)
         {
             case Random:
