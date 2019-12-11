@@ -75,7 +75,7 @@ void GenerateTestData(char *name, int passengerAmount, int luggagePercent)
         }
     }
 
-    fprintf(passengerFile, "%d", numLuggage);
+    fprintf(passengerFile, "L%d", numLuggage);
 
     fclose(passengerFile);
     int p = (numLuggage / (float)passengerAmount) * 100;
