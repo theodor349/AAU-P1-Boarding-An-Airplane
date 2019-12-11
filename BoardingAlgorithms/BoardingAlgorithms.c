@@ -13,6 +13,7 @@ void convertSeatLettersBack(passenger *passengers, int numPassengers);
 void knuthShuffle(passenger *passengers, int start, int end);
 int randIndex(int i, int end);
 void swap(passenger *passengers, int iA, int iB);
+void reversePassengers(passenger *sorted_passengers, int numPassengers);
 
 void testFunction() {
     passenger passengers[3];
@@ -88,9 +89,15 @@ void randomQue(passenger *passengers, int numPassengers) {
 
 void backToFrontQue(passenger *passengers, passenger *sorted_passengers, int numPassengers) {
     int mid = numPassengers / 2;
+    reversePassengers(sorted_passengers, numPassengers);
     knuthShuffle(sorted_passengers, 0, mid);
     knuthShuffle(sorted_passengers, mid, numPassengers);
     CopyArray(passengers, sorted_passengers, numPassengers);
+}
+
+void reversePassengers(passenger *passengers, int numPassengers) {
+    for(int i = 0; i < (int)numPassengers/2; i++)
+        swap(passengers, numPassengers-1-i, i);
 }
 
 void knuthShuffle(passenger *passengers, int start, int end) {
