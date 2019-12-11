@@ -194,7 +194,7 @@ void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalcula
 
     // For each Boarding procedure
     for (int i = 0; i < BOARDINGALGORITHMS; i++) {
-        int times = i < 2 ? 100 : 1;
+        int times = (i < 2 && times != 0) ? 100 : 1;
         int tValue = 0;
 
         for (int j = 0; j < times; ++j)

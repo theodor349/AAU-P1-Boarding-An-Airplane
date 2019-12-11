@@ -13,7 +13,7 @@ void resetPassengers(passenger *passengers, int numPassengers);
 float runSimulation(passenger *pArr, int pArrSize) {
     int tick = 0, seatedPassengers = 0;
 
-    // Make sure all passenger data is as expected 
+    // Make sure all passenger data is as expected
     resetPassengers(pArr, pArrSize);
 
     // Keep ticking until all passengers are seated
@@ -44,7 +44,7 @@ float runSimulation(passenger *pArr, int pArrSize) {
 void resetPassengers(passenger *passengers, int numPassengers) {
     convertSeatLetters(passengers, numPassengers);
     for (int i = 0; i < numPassengers; ++i) {
-        passengers[i].currPos.x = -1 - i;
+        passengers[i].currPos.x = -3 - i;
         passengers[i].currPos.y = 0;
         passengers[i].currState = LookingForRow;
         passengers[i].ticksToWait = 0;
