@@ -14,8 +14,7 @@ void knuthShuffle(passenger *passengers, int start, int end);
 int randIndex(int i, int end);
 void swap(passenger *passengers, int iA, int iB);
 
-void testFunction()
-{
+void testFunction() {
     passenger passengers[3];
     generatePassengers(passengers);
     printPassenger(passengers);
@@ -30,8 +29,7 @@ void testFunction()
 }
 
 // CALLED FROM MAIN FUNCTION
-void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure)
-{
+void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure procedure) {
     srand(time(NULL)); 
 
     // Convert seatletters from simulation to boarding stadard
@@ -44,8 +42,7 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
     qsort(passengersCopy, numPassengers, sizeof(passengers[0]), (compfn)passengerCompare);
 
     // Call the correct procedure
-    switch (procedure)
-    {
+    switch (procedure) {
         case Random:
             randomQue(passengers, numPassengers);
             break;
@@ -60,10 +57,8 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
     free(passengersCopy);
 }
 
-void convertSeatLettersBack(passenger *passengers, int numPassengers)
-{
-    for (int i = 0; i < numPassengers; ++i)
-    {
+void convertSeatLettersBack(passenger *passengers, int numPassengers) {
+    for (int i = 0; i < numPassengers; ++i) {
         switch(passengers[i].seatPos.y) {
             case -1:
                 passengers[i].seatPos.y = D;
@@ -79,12 +74,9 @@ void convertSeatLettersBack(passenger *passengers, int numPassengers)
 }
 
 // Copies an array over to a new array
-void CopyArray(passenger *to, passenger *from, int num)
-{
+void CopyArray(passenger *to, passenger *from, int num) {
     for (int i = 0; i < num; ++i)
-    {
         to[i] = from[i];
-    }
 }
 
 // Shuffles the passengers randomly
@@ -100,9 +92,8 @@ void backToFrontQue(passenger *passengers, passenger *sorted_passengers, int num
 }
 
 void knuthShuffle(passenger *passengers, int start, int end) {
-    for (int i = start; i < end; i++) {
+    for (int i = start; i < end; i++)
         swap(passengers, randIndex(i, end), i);
-    }
 }
 
 int randIndex(int i, int end) {
@@ -115,14 +106,13 @@ void swap(passenger *passengers, int iA, int iB) {
     passengers[iB] = temp;
 }
 
-void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers)
-{
+void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers) {
     int group, row, seat, check, placeInQue = 0, p;
 
     // For all groups (Even A-C, UnEven A-C, Even F-D, UnEven F-D)
-    for (group = 0; group < 4; group++){
+    for (group = 0; group < 4; group++) {
         // For every second Row
-        for (row = (ROWS - (group/2)); row > 0 ; row -= 2){
+        for (row = (ROWS - (group/2)); row > 0 ; row -= 2) {
             check = 0;
             // Start a the window
             seat = A;
@@ -132,10 +122,10 @@ void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPass
                 check += 3;
             }
             // For each seat from A-C or F-D
-            for (seat; seat > check; seat--){
+            for (seat; seat > check; seat--) {
                 p = binarySearch(sorted_passengers, seat, row, numPassengers);
                 // If a passenger with this Row and Seat is found
-                if(p != -1){
+                if(p != -1) {
                     passengers[placeInQue] = sorted_passengers[p];
                     placeInQue++;
                 }
@@ -144,8 +134,7 @@ void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPass
     }
 }
 
-int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers)
-{
+int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers) {
     int left = 0, right = numPassengers, middle;
     int py, sy = seat < 4 ? seat + 6 : seat;
     passenger p;
@@ -179,8 +168,7 @@ int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numP
 }
 
 // returns a random index which is not taken
-int getRandomSpot(int *takenSpots, int numPassengers)
-{
+int getRandomSpot(int *takenSpots, int numPassengers) {
     int index = rand() % numPassengers;
     // Increment by 1 while spot is not taken
     while (takenSpots[index])
@@ -193,8 +181,7 @@ int getRandomSpot(int *takenSpots, int numPassengers)
 }
 
 // Compares two passengers
-int passengerCompare(passenger* a, passenger* b)
-{
+int passengerCompare(passenger* a, passenger* b) {
     // Row
     int r = a->seatPos.x - b->seatPos.x;
     if(r != 0)
@@ -210,18 +197,14 @@ int passengerCompare(passenger* a, passenger* b)
  * Dummy stuff :D
  */
 
-void printPassenger(passenger passengers[189])
-{
-    for (int i = 0; i < 189; ++i)
-    {
+void printPassenger(passenger passengers[189]) {
+    for (int i = 0; i < 189; ++i) {
         printf("%3d row: %2d, seat %c\n", i, passengers[i].seatPos.x, GetSeatName((seatLetter) passengers[i].seatPos.y));
     }
 }
 
-char GetSeatName(seatLetter letter)
-{
-    switch (letter)
-    {
+char GetSeatName(seatLetter letter) {
+    switch (letter) {
         case Aisle:
             return 'N';
         case C:
@@ -240,8 +223,7 @@ char GetSeatName(seatLetter letter)
     return '\0';
 }
 
-void generatePassengers(passenger passengers[3])
-{
+void generatePassengers(passenger passengers[3]) {
     passenger temp;
     point p;
 
