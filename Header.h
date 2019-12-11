@@ -37,11 +37,12 @@ struct passenger {
 } passenger;
 
 typedef
-enum boardingProcedure{
-    Random = 0,
+enum boardingProcedure {
+    Raw = 0,
+    Random,
     SteffenModified,
     BackToFront
-}boardingProcedure;
+} boardingProcedure;
 
 typedef
 enum seatLetter{
