@@ -1,5 +1,5 @@
 #include "Header.h"
-#define BOARDINGALGORITHMS 2
+#define BOARDINGALGORITHMS 3
 
 int main (void){
     // Boarding procedure Times    
@@ -33,6 +33,9 @@ int main (void){
                 break;
             case SteffenModified:
                 printf("%-30s | ", "Steffen modified boarding time");
+                break;
+            case BackToFront:
+                printf("%-30s | ", "Back-to-front modified boarding time");
                 break;
             default:
                 printf("error parsing boarding procedure: ");

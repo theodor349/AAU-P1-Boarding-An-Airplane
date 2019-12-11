@@ -3,6 +3,7 @@
 
 void testFunction();
 void randomQue(passenger *passengers, int numPassengers);
+void backToFrontQue(passenger *passengers, passenger *sorted_passengers, int numPassengers);
 void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPassengers);
 int binarySearch(passenger *sortedPassengers, seatLetter seat, int row, int numPassengers);
 int passengerCompare(passenger* a, passenger* b);
@@ -51,6 +52,9 @@ void QueuePassengers(passenger* passengers, int numPassengers, boardingProcedure
         case SteffenModified:
             steffenQue(passengers, passengersCopy, numPassengers);
             break;
+        case BackToFront:
+            backToFrontQue(passengers, passengersCopy, numPassengers);
+            break;
     }
 
     free(passengersCopy);
@@ -86,6 +90,13 @@ void CopyArray(passenger *to, passenger *from, int num)
 // Shuffles the passengers randomly
 void randomQue(passenger *passengers, int numPassengers) {
     knuthShuffle(passengers, 0, numPassengers);
+}
+
+void backToFrontQue(passenger *passengers, passenger *sorted_passengers, int numPassengers) {
+    int mid = numPassengers / 2;
+    knuthShuffle(sorted_passengers, 0, mid);
+    knuthShuffle(sorted_passengers, mid, numPassengers);
+    CopyArray(passengers, sorted_passengers, numPassengers);
 }
 
 void knuthShuffle(passenger *passengers, int start, int end) {
