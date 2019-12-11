@@ -6,7 +6,7 @@
 
 int main(void) {
     FILE *passengerFile = fopen("passengertext.txt", "w");
-    int i = 0, j = 0, determineChance = 0, rowNum = 1, hasLuggage = 0, passengerAmount = 0;
+    int i = 0, j = 0, determineChance = 0, rowNum = 1, hasLuggage = 0, luggagePercent, passengerAmount = 0;
     char seatNum[NUM_OF_SEATS_IN_ROW] = {'A','B','C','D','E','F'};
     srand(time(NULL));
 
@@ -15,12 +15,13 @@ int main(void) {
         exit(0);
     }
 
-    printf("Number of passengers to create:\n");
-    scanf(" %d", &passengerAmount);
+    printf("Number of passengers to create whith given luggage %:\n");
+    scanf(" %d %d", &passengerAmount, &luggagePercent);
+    luggage %= 100;
 
     for (i = 1; i < passengerAmount + 1; i++) {
         determineChance = rand() % 100 + 1;
-        if (determineChance > 90) {
+        if (determineChance > luggagePercent) {
             hasLuggage = 0;
         }
         else if (determineChance <= 90) {
