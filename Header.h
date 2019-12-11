@@ -39,7 +39,8 @@ struct passenger {
 typedef
 enum boardingProcedure{
     Random = 0,
-    SteffenModified
+    SteffenModified,
+    BackToFront
 }boardingProcedure;
 
 typedef
