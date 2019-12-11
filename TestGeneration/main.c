@@ -1,16 +1,30 @@
 #include "..\Header.h"
 #include <time.h>
+#include <unistd.h>
 
 #define NUM_OF_SEATS_IN_ROW 6
-#define NUM_OF_ROWS 33
 
 void GenerateTestData(char *name, int passengerAmount, int luggagePercent);
 
 int main(void)
 {
     char* fileName = calloc(32, 1);
-    int numPassengers, luggagePercent;
-    GenerateTestData(fileName, numPassengers, luggagePercent);
+    int numPassengers = 189, luggagePercent;
+    int stepSize = 25, multiples = 1;
+
+    chdir("..");
+    chdir("..");
+    if(chdir("\TestData") != 0)
+        printf("Something Went Bad with the directories \n");
+
+    int check = 100 * multiples + 1;
+    int fileNum = 0;
+    for (int i = 0; i < check; i += stepSize, fileNum++)
+    {
+        sprintf(fileName, "LuggagePercent_%d.txt", fileNum);
+        luggagePercent = i % 101;
+        GenerateTestData(fileName, numPassengers, luggagePercent);
+    }
 
     return 0;
 }
@@ -35,6 +49,7 @@ void GenerateTestData(char *name, int passengerAmount, int luggagePercent)
         }
         else {
             hasLuggage = 1;
+            numLuggage++;
         }
         if (rowNum != 13) {
             if (rowNum > 14) {
@@ -60,6 +75,10 @@ void GenerateTestData(char *name, int passengerAmount, int luggagePercent)
         }
     }
 
+    fprintf(passengerFile, "%d", numLuggage);
+
     fclose(passengerFile);
+    int p = (numLuggage / (float)passengerAmount) * 100;
+    printf("Made Data: %s with %d luggage\n", name, p);
 }
 

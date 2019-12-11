@@ -122,7 +122,7 @@ void steffenQue(passenger *passengers, passenger *sorted_passengers, int numPass
                 check += 3;
             }
             // For each seat from A-C or F-D
-            for (seat; seat > check; seat--) {
+            for (; seat > check; seat--) {
                 p = binarySearch(sorted_passengers, seat, row, numPassengers);
                 // If a passenger with this Row and Seat is found
                 if(p != -1) {
