@@ -4,27 +4,36 @@
 #define NUM_OF_SEATS_IN_ROW 6
 #define NUM_OF_ROWS 33
 
-int main(void) {
-    FILE *passengerFile = fopen("passengertext.txt", "w");
-    int i = 0, j = 0, determineChance = 0, rowNum = 1, hasLuggage = 0, luggagePercent, passengerAmount = 0;
+void GenerateTestData(char *name, int passengerAmount, int luggagePercent);
+
+int main(void)
+{
+    char* fileName = calloc(32, 1);
+    int numPassengers, luggagePercent;
+    GenerateTestData(fileName, numPassengers, luggagePercent);
+
+    return 0;
+}
+
+void GenerateTestData(char *name, int passengerAmount, int luggagePercent)
+{
+    int i = 0, j = 0, determineChance = 0, rowNum = 1, hasLuggage = 0;
+    int numLuggage = 0;
     char seatNum[NUM_OF_SEATS_IN_ROW] = {'A','B','C','D','E','F'};
     srand(time(NULL));
 
+    FILE *passengerFile = fopen(name, "w");
     if (passengerFile == NULL) {
         printf("FILE NOT FOUND\n");
         exit(0);
     }
-
-    printf("Number of passengers to create whith given luggage %:\n");
-    scanf(" %d %d", &passengerAmount, &luggagePercent);
-    luggage %= 100;
 
     for (i = 1; i < passengerAmount + 1; i++) {
         determineChance = rand() % 100 + 1;
         if (determineChance > luggagePercent) {
             hasLuggage = 0;
         }
-        else if (determineChance <= 90) {
+        else {
             hasLuggage = 1;
         }
         if (rowNum != 13) {
@@ -39,7 +48,6 @@ int main(void) {
                 if (i % 6 == 0) {
                     rowNum++;
                 }
-
             }
         }
         if (rowNum == 13) {
@@ -53,5 +61,5 @@ int main(void) {
     }
 
     fclose(passengerFile);
-    return 0;
 }
+

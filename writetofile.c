@@ -24,7 +24,7 @@ int main(void) {
         if (determineChance > luggagePercent) {
             hasLuggage = 0;
         }
-        else if (determineChance <= 90) {
+        else {
             hasLuggage = 1;
         }
         if (rowNum != 13) {
