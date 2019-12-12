@@ -14,7 +14,8 @@ void stateSeating(passenger *pArr, int pArrSize, int i) {
         // Get seat position of closes passenger
 		int Sp = abs(pArr[getClosestToAisle(pArr, pArrSize, i)].seatPos.y);
 		// Set time to wait
-		pArr[i].ticksToWait = 2*(O + Sp) - (Sp - 1);
+		pArr[i].ticksToWait = (2*(O + Sp) - (Sp - 1)) - 1;
+        printf("%d\n",pArr[i].ticksToWait);
 	}
 	// Set the passenger to be at the intented seat
     pArr[i].currPos.y = pArr[i].seatPos.y;
