@@ -36,7 +36,7 @@ int RunTests()
 
     // Boarding procedure Times
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
-    int index = 0, numPassengers, numLuggage, position;
+    int index = 1, numPassengers, numLuggage, position;
     int tBoardingTimes[101][BOARDINGALGORITHMS][2];
     // Reset Array
     for (int position = 0; position < 101; ++position)
@@ -68,6 +68,8 @@ int RunTests()
 
         if(index % 100 == 0)
             printf("Index: %d\n", index);
+
+        fclose(passengerSource);
         index++;
         passengerSource = GetFilePointer(index);
     }

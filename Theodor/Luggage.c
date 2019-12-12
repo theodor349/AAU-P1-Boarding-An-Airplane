@@ -1,5 +1,6 @@
 #include "..\Header.h"
-#define LUGGAGE_STORE_TICKS 30
+//The luggage store time is 25 ticks, but because of loop arithmetic it set to 24
+#define LUGGAGE_STORE_TICKS 24
 
 void stateLuggage(passenger *pArr, int i) {
     // If the passengers has no luggage or has stowed it away
