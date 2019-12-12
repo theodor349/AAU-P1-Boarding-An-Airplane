@@ -22,10 +22,10 @@ void stateSeating(passenger *pArr, int pArrSize, int i) {
 
 int countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
 	int n = 0;
-	// For each passenger 
+	// For each passenger
 	for(int i = 0; i < pArrSize; i++) {
 		// If the passenger is idle(seated) and at the correct row
-		if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].seatPos.x + 1) / 2) {
+		if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].currPos.x)) {
 			// If the seated passenger is blocking the way (Closer to the aisle than the destination seat)
 			if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
 			   (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0))
@@ -41,7 +41,7 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	// For each passenger
 	for(int i = 0; i < pArrSize; i++) {
 		// If the passenger is idle(seated) and at the correct row
-		if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].seatPos.x + 1) / 2) {
+		if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].currPos.x) {
 			// If the seated passenger is blocking the way (Closer to the aisle than the destination seat)
 			if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
 			   (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0)) {
@@ -49,7 +49,7 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 				if(abs(pArr[i].seatPos.y) < dist) {
 					// Set dist
 					dist = abs(pArr[i].seatPos.y);
-					// Set closest Passenger 
+					// Set closest Passenger
 					closestI = i;
 				}
 			}
