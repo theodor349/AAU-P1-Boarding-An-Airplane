@@ -29,12 +29,14 @@ int main (void){
 int RunTests()
 {
     // Navigate to Test dir
+    chdir("..");
+    chdir("..");
     if(chdir("\TestData") != 0)
         printf("Something Went Bad with the directories \n");
 
     // Boarding procedure Times
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
-    int index = 0, numPassengers, numLuggage, position;
+    int index = 1, numPassengers, numLuggage, position;
     int tBoardingTimes[101][BOARDINGALGORITHMS][2];
     // Reset Array
     for (int position = 0; position < 101; ++position)
@@ -64,6 +66,10 @@ int RunTests()
             tBoardingTimes[position][i][1] = tBoardingTimes[position][i][1] + 1;
         }
 
+        if(index % 100 == 0)
+            printf("Index: %d\n", index);
+
+        fclose(passengerSource);
         index++;
         passengerSource = GetFilePointer(index);
     }
@@ -75,6 +81,7 @@ int RunTests()
     if(chdir("\Results") != 0)
         printf("Something Went Bad with the directories \n");
     FILE *outputFile = fopen("Results.csv", "w");
+    fprintf(outputFile, "Sample Size: %d\n", index);
 
     for (int i = 0; i < BOARDINGALGORITHMS; ++i)
     {
@@ -91,7 +98,7 @@ int RunTests()
                 fprintf(outputFile, "%s", "Back to Front\n");
                 break;
             case Raw:
-            	fprintf(outputFile, "%s", "Raw\n");
+                fprintf(outputFile, "%s", "Raw\n");
                 break;
             default:
                 fprintf(outputFile, "%s", "Error\n");
