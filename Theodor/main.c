@@ -111,6 +111,8 @@ int RunTests()
                 int time = tBoardingTimes[position][i][0] / tBoardingTimes[position][i][1];
                 if(position == 100)
                     fprintf(outputFile, "%d, ", 1);
+                else if(position < 10)
+                    fprintf(outputFile, "0.0%d, ");
                 else
                     fprintf(outputFile, "0.%d, ", position);
                 fprintf(outputFile, "%d\n", time);
