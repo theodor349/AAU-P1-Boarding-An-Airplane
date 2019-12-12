@@ -41,7 +41,7 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
 	// For each passenger
 	for(int i = 0; i < pArrSize; i++) {
 		// If the passenger is idle(seated) and at the correct row
-		if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].currPos.x) {
+		if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].currPos.x)) {
 			// If the seated passenger is blocking the way (Closer to the aisle than the destination seat)
 			if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
 			   (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0)) {
