@@ -6,7 +6,7 @@
 #define SIT_TIME 0
 #define MAX_ROWS 33
 #define MAX_SEATS 189
-#define TIMESTEP_IN_SECONDS 0.45
+#define TIMESTEP_IN_SECONDS 0.56
 
 void resetPassengers(passenger *passengers, int numPassengers);
 
