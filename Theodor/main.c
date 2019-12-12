@@ -1,7 +1,7 @@
 #include "..\Header.h"
 #include <unistd.h>
 
-#define BOARDINGALGORITHMS 3
+#define BOARDINGALGORITHMS 4
 
 int RunProgram();
 int RunTests();
@@ -14,13 +14,9 @@ void writeTestResults(int boardingTimes[][BOARDINGALGORITHMS][2]);
 int main (void){
     int result;
     int input = 1;
-    if(1 == 0)
-    {
-        printf("0 = Tests, 1 = Program\n");
-        scanf(" %d", &input);
-    }
-    else
-        input = 0;
+
+    printf("0 = Tests, 1 = Program\n");
+    scanf(" %d", &input);
 
     if(input > 0)
         result = RunProgram();
@@ -70,6 +66,8 @@ int RunTests()
             tBoardingTimes[position][i][1] = tBoardingTimes[position][i][1] + 1;
         }
 
+        if(index % 100 == 0)
+            printf("Index: %d\n", index);
         index++;
         passengerSource = GetFilePointer(index);
     }
@@ -81,6 +79,7 @@ int RunTests()
     if(chdir("\Results") != 0)
         printf("Something Went Bad with the directories \n");
     FILE *outputFile = fopen("Results.csv", "w");
+    fprintf(outputFile, "Sample Size: %d\n", index);
 
     for (int i = 0; i < BOARDINGALGORITHMS; ++i)
     {
@@ -95,6 +94,9 @@ int RunTests()
                 break;
             case BackToFront:
                 fprintf(outputFile, "%s", "Back to Front\n");
+                break;
+            case Raw:
+                fprintf(outputFile, "%s", "Raw\n");
                 break;
             default:
                 fprintf(outputFile, "%s", "Error\n");
@@ -154,7 +156,7 @@ int RunProgram()
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
 
     // Initial setup
-    FILE *passengerSource = fopen("passengerText.txt", "r");
+    FILE *passengerSource = fopen("passengertext.txt", "r");
     GetBoardingTimes(passengerSource, boardingCalculations);
 
     // Sort the Boarding Times
@@ -174,6 +176,9 @@ int RunProgram()
             case BackToFront:
                 printf("%-30s | ", "Back-to-front boarding time");
                 break;
+            case Raw:
+                printf("%-30s | ", "Raw boarding time");
+                break;
             default:
                 printf("error parsing boarding procedure: ");
                 break;
@@ -189,13 +194,12 @@ int RunProgram()
 
 void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalculations[BOARDINGALGORITHMS])
 {
-
     passenger *pArray = gather(passengerSource);
     int pAmount = getPassengerAmount(passengerSource);
 
     // For each Boarding procedure
     for (int i = 0; i < BOARDINGALGORITHMS; i++) {
-        int times = i < 2 ? 100 : 1;
+        int times = (i < 2 && times != 0) ? 100 : 1;
         int tValue = 0;
 
         for (int j = 0; j < times; ++j)

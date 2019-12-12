@@ -10,7 +10,7 @@ int main(void)
 {
     char* fileName = calloc(32, 1);
     int numPassengers = 189, luggagePercent;
-    int stepSize = 2, multiples = 4;
+    int stepSize = 1, multiples = 10;
 
     chdir("..");
     chdir("..");
@@ -79,6 +79,6 @@ void GenerateTestData(char *name, int passengerAmount, int luggagePercent)
 
     fclose(passengerFile);
     int p = (numLuggage / (float)passengerAmount) * 100;
-    printf("Made Data: %s with %d luggage\n", name, p);
+    //printf("Made Data: %s with %d luggage\n", name, p);
 }
 
