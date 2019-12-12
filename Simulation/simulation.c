@@ -16,6 +16,12 @@ float runSimulation(passenger *pArr, int pArrSize) {
     // Make sure all passenger data is as expected
     resetPassengers(pArr, pArrSize);
 
+    for(int i = 0; i < pArrSize; i++) {
+        printf("i:%d, x:%d, y:%d seat_x:%d, seat_y:%d, state:%d, wait:%d\n",
+        i, pArr[i].currPos.x, pArr[i].currPos.y, (pArr[i].seatPos.x * 2) - 1, pArr[i].seatPos.y, pArr[i].currState, pArr[i].ticksToWait);
+    }
+    printf("\n");
+
     // Keep ticking until all passengers are seated
     while(seatedPassengers < pArrSize) {
 
@@ -30,13 +36,19 @@ float runSimulation(passenger *pArr, int pArrSize) {
             else
                 updatePassenger(pArr, pArrSize, i);
 
+            printf("i:%d, x:%d, y:%d seat_x:%d, seat_y:%d, state:%d, wait:%d\n",
+            i, pArr[i].currPos.x, pArr[i].currPos.y, (pArr[i].seatPos.x * 2) - 1, pArr[i].seatPos.y, pArr[i].currState, pArr[i].ticksToWait);
+
             // If the passenger has entered the Idle state increment seated passengers by 1
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
         }
+        printf("\n");
 
         tick++;
     }
+
+    printf("%d\n", tick);
 
     return tick * TIMESTEP_IN_SECONDS;
 }
