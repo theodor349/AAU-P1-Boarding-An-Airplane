@@ -1,5 +1,4 @@
 #include "..\Header.h"
-
 void stateSeating(passenger *pArr, int pArrSize, int i) {
     // Is the passenger at the intended seat?
     if(pArr[i].currPos.y == pArr[i].seatPos.y) {
@@ -8,14 +7,17 @@ void stateSeating(passenger *pArr, int pArrSize, int i) {
         return;
     }
 
-    // Get number of passengers blocking the way to the seat
-    int O = countPassengersInRow(pArr, pArrSize, i);
-    if(O > 0) {
-        // Get seat position of closes passenger
-        int Sp = abs(pArr[getClosestToAisle(pArr, pArrSize, i)].seatPos.y);
-        // Set time to wait
-        pArr[i].ticksToWait = 2*(O + Sp) - (Sp - 1);
+    if(abs(pArr[i].seatPos.y) > 1) {
+        // Get number of passengers blocking the way to the seat
+        int O = countPassengersInRow(pArr, pArrSize, i);
+        if(O > 0) {
+            // Get seat position of closes passenger
+            int Sp = abs(pArr[getClosestToAisle(pArr, pArrSize, i)].seatPos.y);
+            // Set time to wait
+            pArr[i].ticksToWait = (2*(O + Sp) - (Sp - 1)) - 1;
+        }
     }
+
     // Set the passenger to be at the intented seat
     pArr[i].currPos.y = pArr[i].seatPos.y;
 }
@@ -25,7 +27,7 @@ int countPassengersInRow(passenger *pArr, int pArrSize, int pI) {
     // For each passenger
     for(int i = 0; i < pArrSize; i++) {
         // If the passenger is idle(seated) and at the correct row
-        if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].seatPos.x + 1) / 2) {
+        if(pArr[i].currState == Idle && pArr[i].currPos.x == pArr[pI].currPos.x) {
             // If the seated passenger is blocking the way (Closer to the aisle than the destination seat)
             if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
                (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0))
@@ -41,7 +43,7 @@ int getClosestToAisle(passenger *pArr, int pArrSize, int pI) {
     // For each passenger
     for(int i = 0; i < pArrSize; i++) {
         // If the passenger is idle(seated) and at the correct row
-        if(pArr[i].currState == Idle && pArr[i].currPos.x == (pArr[pI].seatPos.x + 1) / 2) {
+        if(pArr[i].currState == Idle && pArr[i].currPos.x == pArr[pI].currPos.x) {
             // If the seated passenger is blocking the way (Closer to the aisle than the destination seat)
             if((pArr[pI].seatPos.y > 0 && pArr[i].seatPos.y > 0) ||
                (pArr[pI].seatPos.y < 0 && pArr[i].seatPos.y < 0)) {

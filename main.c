@@ -1,7 +1,7 @@
 #include "Header.h"
 #include <unistd.h>
 
-#define BOARDINGALGORITHMS 1
+#define BOARDINGALGORITHMS 4
 
 int RunProgram();
 int RunTests();

@@ -34,10 +34,8 @@ float runSimulation(passenger *pArr, int pArrSize) {
             if(pArr[i].currState == Idle)
                 seatedPassengers++;
         }
-
         tick++;
     }
-
     return tick * TIMESTEP_IN_SECONDS;
 }
 
