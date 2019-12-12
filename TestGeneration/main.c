@@ -10,7 +10,7 @@ int main(void)
 {
     char* fileName = calloc(32, 1);
     int numPassengers = 189, luggagePercent;
-    int stepSize = 1, multiples = 10;
+    int stepSize = 1, multiples = 20;
 
     chdir("..");
     chdir("..");
