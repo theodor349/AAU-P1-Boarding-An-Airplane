@@ -112,7 +112,7 @@ int RunTests()
                 if(position == 100)
                     fprintf(outputFile, "%d, ", 1);
                 else if(position < 10)
-                    fprintf(outputFile, "0.0%d, ");
+                    fprintf(outputFile, "0.0%d, ", position);
                 else
                     fprintf(outputFile, "0.%d, ", position);
                 fprintf(outputFile, "%d\n", time);
