@@ -716,4 +716,4 @@ CMakeLists.txt
 # End of https://www.gitignore.io/api/clion
 *.o
 
-*.exe
+Program.exe
