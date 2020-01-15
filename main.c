@@ -29,8 +29,6 @@ int main (void){
 int RunTests()
 {
     // Navigate to Test dir
-    chdir("..");
-    chdir("..");
     if(chdir("\TestData") != 0)
         printf("Something Went Bad with the directories \n");
 
