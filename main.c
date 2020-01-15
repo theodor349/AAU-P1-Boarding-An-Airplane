@@ -154,13 +154,13 @@ FILE *GetFilePointer(int index)
 }
 
 
-int RunProgram()
-{
+int RunProgram() {
     // Boarding procedure Times
     boardingCalculation boardingCalculations[BOARDINGALGORITHMS];
 
     // Initial setup
     FILE *passengerSource = fopen("passengertext.txt", "r");
+    // Parse input file and simulates the passengers for each boarding procedure
     GetBoardingTimes(passengerSource, boardingCalculations);
 
     // Sort the Boarding Times
@@ -196,8 +196,7 @@ int RunProgram()
     return EXIT_SUCCESS;
 }
 
-void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalculations[BOARDINGALGORITHMS])
-{
+void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalculations[BOARDINGALGORITHMS]) {
     passenger *pArray = gather(passengerSource);
     int pAmount = getPassengerAmount(passengerSource);
 
@@ -206,8 +205,7 @@ void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalcula
         int times = (i < 2 && times != 0) ? 100 : 1;
         int tValue = 0;
 
-        for (int j = 0; j < times; ++j)
-        {
+        for (int j = 0; j < times; ++j) {
             // Order Passengers
             QueuePassengers(pArray, pAmount, (boardingProcedure) i);
             tValue += runSimulation(pArray, pAmount);
@@ -215,7 +213,6 @@ void GetBoardingTimes(FILE *passengerSource, boardingCalculation boardingCalcula
         // Calculate Boarding Time
         boardingCalculations[i].time = tValue / times;
         boardingCalculations[i].procedure = i;
-
     }
     free(pArray);
 }
